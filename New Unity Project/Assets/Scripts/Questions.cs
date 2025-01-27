@@ -18,13 +18,17 @@ public class Questions : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            float xValue;
+            float yValue;
             playerNearby = true;
+            //Colocar logica aqui embaixo
             spriteQuestion.sortingOrder = 4;
-            messageText.text = "Teste";
-            messageText.fontSize = 12;
-            messageText.alignment = TextAnchor.MiddleCenter;
+            xValue = spriteQuestion.transform.position.x;
+            yValue = spriteQuestion.transform.position.y;
             RectTransform rect = messageText.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(200,50);
+            Debug.Log("Posicao Local: " + rect.localPosition);
+            Debug.Log("Posicao Global: " + rect.position);
+            
         }
     }
 
