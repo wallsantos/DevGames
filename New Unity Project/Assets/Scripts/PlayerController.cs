@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D _playerRidigibody2D;
+    private Rigidbody2D _playerRigidibody2D;
+    private Animator _playerAnimator;
     public float _playerSpeed;
     private Vector2 _playerDirection;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        _playerRigidibody2D = GetComponent<Rigidbody2D>();
+        _playerAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float valueHorizontal = Input.GetAxisRaw("Horizontal");
+        float valueVertical = Input.GetAxisRaw("Vertical");
+        _playerDirection = new Vector2(valueHorizontal, valueVertical);
+        if(valueHorizontal != 0 || valueVertical != 0){
+            if(valueHorizontal != 0 || valueVertical != 0){
+                _playerAnimator.SetInteger("MovimentoH", 1);    
+            }
+        }else{
+            _playerAnimator.SetInteger("MovimentoH", 0);
+        }
+        Flip();
+    }
+    void FixedUpdate(){
+        _playerRigidibody2D.MovePosition(_playerRigidibody2D.position + _playerDirection * _playerSpeed * Time.fixedDeltaTime);
+    }
+    void Flip(){
+        if(_playerDirection.x > 0){
+            transform.eulerAngles = new Vector2(0f, 0f);
+        }else if(_playerDirection.x < 0){
+            transform.eulerAngles = new Vector2(0f, 180f);
+        }
     }
 }
