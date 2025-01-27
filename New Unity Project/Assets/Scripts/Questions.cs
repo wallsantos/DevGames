@@ -1,12 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Questions : MonoBehaviour
 {
-    private bool playerNearby = false; // Verifica se o jogador está perto
-
+    private bool playerNearby = false;
+    public SpriteRenderer spriteQuestion;
+    public Text messageText;
     void Update()
     {
-        // Verifica se o jogador está próximo e pressionou "E"
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Interagir();
@@ -15,11 +16,15 @@ public class Questions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Detecta se o jogador entrou na área do trigger
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            Debug.Log("Você está perto da barraca. Pressione 'E' para interagir.");
+            spriteQuestion.sortingOrder = 4;
+            messageText.text = "Teste";
+            messageText.fontSize = 12;
+            messageText.alignment = TextAnchor.MiddleCenter;
+            RectTransform rect = messageText.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(200,50);
         }
     }
 
@@ -29,7 +34,7 @@ public class Questions : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = false;
-            Debug.Log("Você saiu da área da barraca.");
+            spriteQuestion.sortingOrder = 0;
         }
     }
 
