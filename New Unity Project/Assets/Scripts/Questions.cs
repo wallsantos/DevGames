@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using System.Collections.Generic;
 
 public class Questions : MonoBehaviour
 {
@@ -77,6 +78,8 @@ public class Questions : MonoBehaviour
             for (int i = 0; i < answerButtons.Length; i++)
             {
                 int answer;
+                List<int> usedAnswers = new List<int>(); // Lista para armazenar respostas já usadas
+
                 if (i == correctButtonIndex)
                 {
                     answer = correctAnswer;
@@ -85,9 +88,12 @@ public class Questions : MonoBehaviour
                 {
                     do
                     {
-                        answer = Random.Range(1, 20);
-                    } while (answer == correctAnswer); // Evitar duplicar a resposta correta
+                        answer = Random.Range(1, 20); // Gerar resposta aleatória
+                    } while (answer == correctAnswer || usedAnswers.Contains(answer)); // Evitar duplicações
                 }
+
+                // Adicionar a resposta à lista de respostas usadas
+                usedAnswers.Add(answer);
 
                 // Atualizar o texto do botão e adicionar o evento de clique
                 answerButtons[i].GetComponentInChildren<Text>().text = answer.ToString();
