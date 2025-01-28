@@ -1,16 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Questions : MonoBehaviour
 {
     private bool playerNearby = false;
     public SpriteRenderer spriteQuestion;
     public Text messageText;
+    public CinemachineVirtualCamera cinemachineCamera;
     void Update()
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Interagir();
+        }
+        if (playerNearby){
+            Camera camera = Camera.main;
+            Vector3 worldPosition = spriteQuestion.transform.position;
+            Vector3 screenPosition = camera.WorldToScreenPoint(worldPosition);
+            Vector3 offset = new Vector3(20, 5, 0);  // Ajuste a posição do texto
+            messageText.rectTransform.position = screenPosition + offset;
         }
     }
 
@@ -18,17 +27,9 @@ public class Questions : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            float xValue;
-            float yValue;
             playerNearby = true;
-            //Colocar logica aqui embaixo
             spriteQuestion.sortingOrder = 4;
-            xValue = spriteQuestion.transform.position.x;
-            yValue = spriteQuestion.transform.position.y;
-            RectTransform rect = messageText.GetComponent<RectTransform>();
-            Debug.Log("Posicao Local: " + rect.localPosition);
-            Debug.Log("Posicao Global: " + rect.position);
-            
+            messageText.text = "Há uma nova missão Aperte E para interagir";
         }
     }
 
@@ -39,6 +40,7 @@ public class Questions : MonoBehaviour
         {
             playerNearby = false;
             spriteQuestion.sortingOrder = 0;
+            messageText.text = "";
         }
     }
 
