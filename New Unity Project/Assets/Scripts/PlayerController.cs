@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Animator _playerAnimator;
     public float _playerSpeed;
     private Vector2 _playerDirection;
+    public bool canMove = true;
 
     void Start()
     {
@@ -17,6 +18,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+        {
+            _playerDirection = Vector2.zero;
+            _playerAnimator.SetInteger("MovimentoH", 0);
+            return;
+        }
         float valueHorizontal = Input.GetAxisRaw("Horizontal");
         float valueVertical = Input.GetAxisRaw("Vertical");
         _playerDirection = new Vector2(valueHorizontal, valueVertical);
@@ -30,7 +37,9 @@ public class PlayerController : MonoBehaviour
         Flip();
     }
     void FixedUpdate(){
-        _playerRigidibody2D.MovePosition(_playerRigidibody2D.position + _playerDirection * _playerSpeed * Time.fixedDeltaTime);
+        if(canMove){
+            _playerRigidibody2D.MovePosition(_playerRigidibody2D.position + _playerDirection * _playerSpeed * Time.fixedDeltaTime);
+        }
     }
     void Flip(){
         if(_playerDirection.x > 0){

@@ -8,6 +8,14 @@ public class Questions : MonoBehaviour
     public SpriteRenderer spriteQuestion;
     public Text messageText;
     public CinemachineVirtualCamera cinemachineCamera;
+
+    private PlayerController playerController;
+    public Text questionText;
+    public Button[] answerButtons;
+    public Text scoreText;
+
+    private int correctAnswer;
+    private int score;
     void Update()
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
@@ -30,6 +38,7 @@ public class Questions : MonoBehaviour
             playerNearby = true;
             spriteQuestion.sortingOrder = 4;
             messageText.text = "Há uma nova missão Aperte E para interagir";
+            playerController = other.GetComponent<PlayerController>();
         }
     }
 
@@ -41,25 +50,64 @@ public class Questions : MonoBehaviour
             playerNearby = false;
             spriteQuestion.sortingOrder = 0;
             messageText.text = "";
+            playerController = null;
         }
     }
 
-    private void Interagir()
-    {
-        // Aqui você pode implementar o comportamento da interação
-        Debug.Log("Você interagiu com a barraca!");
+    private void Interagir(){
+        playerController.canMove = false;
+        spriteQuestion.sortingOrder = 0;
+        messageText.text = "";
+        score = 0;
+        GenerateQuestion();
 
-        // Exemplo de opções:
-        int escolha = Random.Range(0, 2); // Escolhe entre 0 ou 1
-        if (escolha == 0)
-        {
-            Debug.Log("A barraca te faz uma pergunta!");
-            // Exemplo: abrir um menu com uma pergunta
+        void GenerateQuestion(){
+            // Gerar números aleatórios para a pergunta
+            int num1 = Random.Range(1, 10);
+            int num2 = Random.Range(1, 10);
+            correctAnswer = num1 + num2;
+
+            // Exibir a pergunta
+            questionText.text = "Quanto é " + num1 + " + " + num2 + "?";
+
+            // Gerar respostas aleatórias e colocar a correta em um botão aleatório
+            int correctButtonIndex = Random.Range(0, answerButtons.Length);
+            for (int i = 0; i < answerButtons.Length; i++)
+            {
+                int answer;
+                if (i == correctButtonIndex)
+                {
+                    answer = correctAnswer;
+                }
+                else
+                {
+                    do
+                    {
+                        answer = Random.Range(1, 20);
+                    } while (answer == correctAnswer); // Evitar duplicar a resposta correta
+                }
+
+                // Atualizar o texto do botão e adicionar o evento de clique
+                answerButtons[i].GetComponentInChildren<Text>().text = answer.ToString();
+                int selectedAnswer = answer; // Capturar valor para o evento
+                answerButtons[i].onClick.RemoveAllListeners();
+                answerButtons[i].onClick.AddListener(() => CheckAnswer(selectedAnswer));
+            }
         }
-        else
-        {
-            Debug.Log("Há um desafio! Deseja aceitar?");
-            // Exemplo: abrir um menu de confirmação
+
+        void CheckAnswer(int selectedAnswer){
+            if (selectedAnswer == correctAnswer)
+            {
+                score += 10;
+                scoreText.text = "Pontuação: " + score;
+                GenerateQuestion();
+                playerController.canMove = true;
+            }
+            else
+            {
+                score -= 5;
+                scoreText.text = "Pontuação: " + score;
+            }
         }
     }
 }
