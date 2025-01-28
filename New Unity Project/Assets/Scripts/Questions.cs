@@ -10,9 +10,11 @@ public class Questions : MonoBehaviour
     public CinemachineVirtualCamera cinemachineCamera;
 
     private PlayerController playerController;
+    public GameObject TelaMiniGame;
     public Text questionText;
     public Button[] answerButtons;
-    public Text scoreText;
+    public Button exitButton;
+    public GameObject[] Lapis;
 
     private int correctAnswer;
     private int score;
@@ -54,17 +56,17 @@ public class Questions : MonoBehaviour
         }
     }
 
-    private void Interagir(){
+    private void Interagir()
+    {
         playerController.canMove = false;
-        spriteQuestion.sortingOrder = 0;
-        messageText.text = "";
-        score = 0;
+        TelaMiniGame.SetActive(true);
         GenerateQuestion();
 
-        void GenerateQuestion(){
+        void GenerateQuestion()
+        {
             // Gerar números aleatórios para a pergunta
-            int num1 = Random.Range(1, 10);
-            int num2 = Random.Range(1, 10);
+            int num1 = Random.Range(1, 5);
+            int num2 = Random.Range(1, 5);
             correctAnswer = num1 + num2;
 
             // Exibir a pergunta
@@ -93,21 +95,54 @@ public class Questions : MonoBehaviour
                 answerButtons[i].onClick.RemoveAllListeners();
                 answerButtons[i].onClick.AddListener(() => CheckAnswer(selectedAnswer));
             }
-        }
 
-        void CheckAnswer(int selectedAnswer){
-            if (selectedAnswer == correctAnswer)
+            // Configurar o botão de saída
+            Button exitButton = TelaMiniGame.transform.Find("ButtonExit").GetComponent<Button>();
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(ExitMinigame);
+        }
+    }
+
+    public void ExitMinigame()
+    {
+        // Permitir que o jogador volte a se mover
+        playerController.canMove = true;
+
+        // Fechar o minigame
+        TelaMiniGame.SetActive(false);
+    }
+
+    private void CheckAnswer(int selectedAnswer)
+    {
+        if (selectedAnswer == correctAnswer)
+        {
+            // Parabéns, resposta correta
+            ExitMinigame();
+        }
+        else
+        {
+            RemoveLapis();
+            if (Lapis[0].activeSelf == false)
             {
-                score += 10;
-                scoreText.text = "Pontuação: " + score;
-                GenerateQuestion();
-                playerController.canMove = true;
-            }
-            else
-            {
-                score -= 5;
-                scoreText.text = "Pontuação: " + score;
+                GameOver();
             }
         }
+    }
+
+    private void RemoveLapis()
+    {
+        for (int i = Lapis.Length - 1; i >= 0; i--)
+        {
+            if (Lapis[i].activeSelf)
+            {
+                Lapis[i].SetActive(false);
+                break;
+            }
+        }
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Fim de jogo!");
     }
 }
