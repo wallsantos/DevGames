@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class Questions : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Questions : MonoBehaviour
     public Text messageText;
     public CinemachineVirtualCamera cinemachineCamera;
 
+    public GameObject WinCondition;
     private PlayerController playerController;
     public GameObject TelaMiniGame;
     public Text questionText;
@@ -31,6 +33,12 @@ public class Questions : MonoBehaviour
             Vector3 screenPosition = camera.WorldToScreenPoint(worldPosition);
             Vector3 offset = new Vector3(20, 5, 0);  // Ajuste a posição do texto
             messageText.rectTransform.position = screenPosition + offset;
+        }
+        if(playerNearby && Input.GetKeyDown(KeyCode.F)){
+            messageText.text = "Há uma nova missão Aperte E para interagir";
+            WinCondition.SetActive(false);
+            // Permitir que o jogador volte a se mover
+            playerController.canMove = true;
         }
     }
 
@@ -65,6 +73,7 @@ public class Questions : MonoBehaviour
 
         void GenerateQuestion()
         {
+            ResetarBotoes();
             // Gerar números aleatórios para a pergunta
             int num1 = Random.Range(1, 5);
             int num2 = Random.Range(1, 5);
@@ -109,21 +118,24 @@ public class Questions : MonoBehaviour
         }
     }
 
-    public void ExitMinigame()
+    void ResetarBotoes()
     {
-        // Permitir que o jogador volte a se mover
-        playerController.canMove = true;
+        foreach (Button botao in answerButtons)
+        {
+            ColorBlock cb = botao.colors;
+            cb.normalColor = Color.white; // Cor padrão (mude conforme necessário)
+            botao.colors = cb;
 
-        // Fechar o minigame
-        TelaMiniGame.SetActive(false);
+            botao.interactable = true; // Garante que os botões fiquem interativos novamente
+            EventSystem.current.SetSelectedGameObject(null); // Remove a seleção atual
+        }
     }
 
     private void CheckAnswer(int selectedAnswer)
     {
         if (selectedAnswer == correctAnswer)
         {
-            // Parabéns, resposta correta
-            ExitMinigame();
+            WinGame();
         }
         else
         {
@@ -146,7 +158,19 @@ public class Questions : MonoBehaviour
             }
         }
     }
+    void WinGame(){
+        messageText.text = "";
+        WinCondition.SetActive(true);
 
+        // Fechar o minigame
+        TelaMiniGame.SetActive(false);
+    }
+    void ExitMinigame(){
+        // Fechar o minigame
+        TelaMiniGame.SetActive(false);
+        // Permitir que o jogador volte a se mover
+        playerController.canMove = true;
+    }
     private void GameOver()
     {
         Debug.Log("Fim de jogo!");
