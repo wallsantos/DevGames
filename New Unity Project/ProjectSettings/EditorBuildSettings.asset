@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/TelaInicial.unity
+    guid: 8cf18a7b9293c9045ae0eeb9fa25b36a
+  - enabled: 1
+    path: Assets/Project2D.unity
+    guid: 0a9723287d4efba41b1c5698d6311006
   m_configObjects: {}

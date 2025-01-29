@@ -12,6 +12,7 @@ public class Questions : MonoBehaviour
     public CinemachineVirtualCamera cinemachineCamera;
 
     public GameObject WinCondition;
+    public GameObject LoseCondition;
     private PlayerController playerController;
     public GameObject TelaMiniGame;
     public Text questionText;
@@ -31,7 +32,7 @@ public class Questions : MonoBehaviour
             Camera camera = Camera.main;
             Vector3 worldPosition = spriteQuestion.transform.position;
             Vector3 screenPosition = camera.WorldToScreenPoint(worldPosition);
-            Vector3 offset = new Vector3(20, 5, 0);  // Ajuste a posição do texto
+            Vector3 offset = new Vector3(20, 30, 0);  // Ajuste a posição do texto
             messageText.rectTransform.position = screenPosition + offset;
         }
         if(playerNearby && Input.GetKeyDown(KeyCode.F)){
@@ -173,6 +174,7 @@ public class Questions : MonoBehaviour
     }
     private void GameOver()
     {
-        Debug.Log("Fim de jogo!");
+        messageText.text = "";
+        LoseCondition.SetActive(true);
     }
 }
