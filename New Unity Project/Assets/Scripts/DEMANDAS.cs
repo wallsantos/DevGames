@@ -1,25 +1,27 @@
 /*
 Mudanca por niveis como porteira que abre
 
-Feedback responsivo (?)
-
 Tempo para responder ampulheta
 
 Sistema de Ranking geral
-
-Clique verde e vermelho para surdos
 
 Musiquinha
 
 Comemoracao com sons
 
-LETRAS MAIUSCULAS
-
 Uso em sala de aula(editável?)
+
+Identidade visual
+
+07/02
 
 Feito - Evitar chutes na respostas
 
-Identidade visual
+Feito - Feedback responsivo (?)
+
+Feito - LETRAS MAIUSCULAS
+
+Feito - Clique verde e vermelho para surdos
 
 06/02
 

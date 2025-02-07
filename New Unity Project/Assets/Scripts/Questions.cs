@@ -100,12 +100,12 @@ public class Questions : MonoBehaviour
                 case 2:
                     num1 = Random.Range(10, 50);
                     num2 = Random.Range(10, 50);
-                    fatorRandom = Random.Range(3,6);
+                    fatorRandom = 10;
                     break;
                 case 3:
                     num1 = Random.Range(100, 500);
                     num2 = Random.Range(100, 500);
-                    fatorRandom = Random.Range(7,13);
+                    fatorRandom = 10;
                     break;
                 default:
                     break;
@@ -139,7 +139,7 @@ public class Questions : MonoBehaviour
                             answer = correctAnswer + fatorRandom;
                             setAnswer = 1;
                         }else{
-                            answer = correctAnswer - fatorRandom;
+                            answer = correctAnswer - fatorRandom + 5;
                         }
                     } while (answer == correctAnswer || usedAnswers.Contains(answer)); // Evitar duplicações
                 }
