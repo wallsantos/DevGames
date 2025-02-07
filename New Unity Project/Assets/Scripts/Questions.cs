@@ -19,7 +19,9 @@ public class Questions : MonoBehaviour
     public Button[] answerButtons;
     public Button exitButton;
     public GameObject[] Lapis;
+    public GameObject[] LapisPreto;
 
+    public int level;
     private int correctAnswer;
     private int score;
     void Update()
@@ -76,12 +78,46 @@ public class Questions : MonoBehaviour
         {
             ResetarBotoes();
             // Gerar números aleatórios para a pergunta
-            int num1 = Random.Range(1, 5);
-            int num2 = Random.Range(1, 5);
+            int num1 = 1;
+            int num2 = 1;
+            int fatorRandom=1; //Usado para um set das alternativas, muda no switch conforme o player muda de level
+            System.Random random = new System.Random();
+
+            Dictionary<string, string> frutas = new Dictionary<string,string>(){
+                {"abacaxi", "abacaxis"},
+                {"banana", "bananas"},
+                {"laranja", "laranjas"}
+            };
+
+            List<string> chaves = new List<string>(frutas.Keys);
+            string fruta = chaves[random.Next(chaves.Count)];
+
+            switch (level){
+                case 1:
+                    num1 = Random.Range(1, 5);
+                    num2 = Random.Range(1, 5);
+                    break;
+                case 2:
+                    num1 = Random.Range(10, 50);
+                    num2 = Random.Range(10, 50);
+                    fatorRandom = Random.Range(3,6);
+                    break;
+                case 3:
+                    num1 = Random.Range(100, 500);
+                    num2 = Random.Range(100, 500);
+                    fatorRandom = Random.Range(7,13);
+                    break;
+                default:
+                    break;
+            }
+            int setAnswer = 0;
+            string fruta1 = (num1==1)? fruta: frutas[fruta];
+            string fruta2 = (num2==1)? fruta: frutas[fruta];
+            
             correctAnswer = num1 + num2;
 
             // Exibir a pergunta
-            questionText.text = "Quanto é " + num1 + " + " + num2 + "?";
+            questionText.text = $"Quanto é {num1} {fruta1} + {num2} {fruta2}?";
 
             // Gerar respostas aleatórias e colocar a correta em um botão aleatório
             int correctButtonIndex = Random.Range(0, answerButtons.Length);
@@ -98,7 +134,13 @@ public class Questions : MonoBehaviour
                 {
                     do
                     {
-                        answer = Random.Range(1, 20); // Gerar resposta aleatória
+                        if(setAnswer==0){
+                            //answer = Random.Range(1, 20); // Gerar resposta aleatória
+                            answer = correctAnswer + fatorRandom;
+                            setAnswer = 1;
+                        }else{
+                            answer = correctAnswer - fatorRandom;
+                        }
                     } while (answer == correctAnswer || usedAnswers.Contains(answer)); // Evitar duplicações
                 }
 
@@ -155,6 +197,7 @@ public class Questions : MonoBehaviour
             if (Lapis[i].activeSelf)
             {
                 Lapis[i].SetActive(false);
+                LapisPreto[i].SetActive(true);
                 break;
             }
         }
