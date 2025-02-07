@@ -13,6 +13,14 @@ Musiquinha
 
 Comemoracao com sons
 
+LETRAS MAIUSCULAS
+
+Uso em sala de aula(editável?)
+
+Feito - Evitar chutes na respostas
+
+Identidade visual
+
 06/02
 
 Feito - Resposta certa +1 e -1(nivel facil), criado um fatorRandom para aumentar a dificuldade das alternativas corretas

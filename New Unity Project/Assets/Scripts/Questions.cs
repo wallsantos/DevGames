@@ -38,7 +38,7 @@ public class Questions : MonoBehaviour
             messageText.rectTransform.position = screenPosition + offset;
         }
         if(playerNearby && Input.GetKeyDown(KeyCode.F)){
-            messageText.text = "Há uma nova missão Aperte E para interagir";
+            messageText.text = "HÁ UMA NOVA PERGUNTA, APERTE E PARA INTERAGIR";
             WinCondition.SetActive(false);
             // Permitir que o jogador volte a se mover
             playerController.canMove = true;
@@ -51,7 +51,7 @@ public class Questions : MonoBehaviour
         {
             playerNearby = true;
             spriteQuestion.sortingOrder = 4;
-            messageText.text = "Há uma nova missão Aperte E para interagir";
+            messageText.text = "HÁ UMA NOVA PERGUNTA, APERTE E PARA INTERAGIR";
             playerController = other.GetComponent<PlayerController>();
         }
     }
@@ -84,9 +84,9 @@ public class Questions : MonoBehaviour
             System.Random random = new System.Random();
 
             Dictionary<string, string> frutas = new Dictionary<string,string>(){
-                {"abacaxi", "abacaxis"},
-                {"banana", "bananas"},
-                {"laranja", "laranjas"}
+                {"ABACAXI", "ABACAXIS"},
+                {"BANANA", "BANANAS"},
+                {"LARANJA", "LARANJAS"}
             };
 
             List<string> chaves = new List<string>(frutas.Keys);
@@ -117,7 +117,7 @@ public class Questions : MonoBehaviour
             correctAnswer = num1 + num2;
 
             // Exibir a pergunta
-            questionText.text = $"Quanto é {num1} {fruta1} + {num2} {fruta2}?";
+            questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n+{num2} {fruta2}?";
 
             // Gerar respostas aleatórias e colocar a correta em um botão aleatório
             int correctButtonIndex = Random.Range(0, answerButtons.Length);
