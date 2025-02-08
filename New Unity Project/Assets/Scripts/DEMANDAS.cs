@@ -1,4 +1,6 @@
 /*
+Colocar Impares e pares
+
 Mudanca por niveis como porteira que abre
 
 Tempo para responder ampulheta
@@ -12,6 +14,8 @@ Comemoracao com sons
 Uso em sala de aula(editável?)
 
 Identidade visual
+
+Colocar uma narrativa - Voce conquistou um diploma EBAAA(sensacao de progressao)
 
 07/02
 
