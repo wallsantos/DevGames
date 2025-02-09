@@ -1,29 +1,50 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 public class Questions : MonoBehaviour
 {
     private bool playerNearby = false;
-    public SpriteRenderer spriteQuestion;
-    public Text messageText;
-    public CinemachineVirtualCamera cinemachineCamera;
+    private PlayerController playerController;
+    private SpriteRenderer spriteRenderer;
 
+    private GameObject[] Lapis;
+    private GameObject[] LapisPreto;
     public GameObject WinCondition;
     public GameObject LoseCondition;
-    private PlayerController playerController;
+
+    private GameObject spriteQuestion1;
+    private GameObject spriteQuestion2;
+    private GameObject spriteQuestion3;
+    private GameObject spriteQuestion4;
+    
     public GameObject TelaMiniGame;
-    public Text questionText;
-    public Button[] answerButtons;
-    public Button exitButton;
-    public GameObject[] Lapis;
-    public GameObject[] LapisPreto;
+    private Text questionText;
+    private Button[] answerButtons;
+    private Button ButtonExit;
+    
+
+    private int correctAnswer;
 
     public int level;
-    private int correctAnswer;
-    private int score;
+
+    void Start(){
+        Lapis = new GameObject[3];
+        Lapis[0] = GameObject.Find("pencil0");
+        Lapis[1] = GameObject.Find("pencil1");
+        Lapis[2] = GameObject.Find("pencil2");
+        //Lapis Preto
+        LapisPreto = new GameObject[3];
+        LapisPreto[0] = GameObject.Find("pencilB0");
+        LapisPreto[1] = GameObject.Find("pencilB1");
+        LapisPreto[2] = GameObject.Find("pencilB2");
+
+        spriteQuestion1 = GameObject.Find("spriteQuestion1");
+        spriteQuestion2 = GameObject.Find("spriteQuestion2");
+        spriteQuestion3 = GameObject.Find("spriteQuestion3");
+        spriteQuestion4 = GameObject.Find("spriteQuestion4");
+    }
     void Update()
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
@@ -31,47 +52,59 @@ public class Questions : MonoBehaviour
             Interagir();
         }
         if (playerNearby){
-            Camera camera = Camera.main;
-            Vector3 worldPosition = spriteQuestion.transform.position;
-            Vector3 screenPosition = camera.WorldToScreenPoint(worldPosition);
-            Vector3 offset = new Vector3(20, 30, 0);  // Ajuste a posição do texto
-            messageText.rectTransform.position = screenPosition + offset;
+            
         }
         if(playerNearby && Input.GetKeyDown(KeyCode.F)){
-            messageText.text = "HÁ UMA NOVA PERGUNTA, APERTE E PARA INTERAGIR";
-            WinCondition.SetActive(false);
             // Permitir que o jogador volte a se mover
             playerController.canMove = true;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            spriteQuestion.sortingOrder = 4;
-            messageText.text = "HÁ UMA NOVA PERGUNTA, APERTE E PARA INTERAGIR";
+            spriteRenderer = spriteQuestion1.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 10;
+            spriteRenderer = spriteQuestion2.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 10;
+            spriteRenderer = spriteQuestion3.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 10;
+            spriteRenderer = spriteQuestion4.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 10;
             playerController = other.GetComponent<PlayerController>();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         // Detecta se o jogador saiu da área do trigger
         if (other.CompareTag("Player"))
         {
+            spriteRenderer = spriteQuestion1.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 0;
+            spriteRenderer = spriteQuestion2.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 0;
+            spriteRenderer = spriteQuestion3.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 0;
+            spriteRenderer = spriteQuestion4.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = 0;
             playerNearby = false;
-            spriteQuestion.sortingOrder = 0;
-            messageText.text = "";
             playerController = null;
         }
     }
 
-    private void Interagir()
+    void Interagir()
     {
         playerController.canMove = false;
         TelaMiniGame.SetActive(true);
+        answerButtons = new Button[3];
+        answerButtons[0] = GameObject.Find("answerButtons[0]").GetComponent<Button>();
+        answerButtons[1] = GameObject.Find("answerButtons[1]").GetComponent<Button>();
+        answerButtons[2] = GameObject.Find("answerButtons[2]").GetComponent<Button>();
+        questionText = GameObject.Find("TelaMiniGame/Image/questionText").GetComponent<Text>();
+        ButtonExit = GameObject.Find("ButtonExit").GetComponent<Button>();
         GenerateQuestion();
 
         void GenerateQuestion()
@@ -174,7 +207,7 @@ public class Questions : MonoBehaviour
         }
     }
 
-    private void CheckAnswer(int selectedAnswer)
+    void CheckAnswer(int selectedAnswer)
     {
         if (selectedAnswer == correctAnswer)
         {
@@ -190,21 +223,21 @@ public class Questions : MonoBehaviour
         }
     }
 
-    private void RemoveLapis()
+    void RemoveLapis()
     {
-        for (int i = Lapis.Length - 1; i >= 0; i--)
+        if (Lapis[2].activeSelf) // Verifica se está ativo corretamente
         {
-            if (Lapis[i].activeSelf)
-            {
-                Lapis[i].SetActive(false);
-                LapisPreto[i].SetActive(true);
-                break;
-            }
+            Lapis[2].SetActive(false);
+            LapisPreto[2].SetActive(true);
+        }
+        if (Lapis[1].activeSelf) // Verifica se está ativo corretamente
+        {
+            Lapis[1].SetActive(false);
+            LapisPreto[1].SetActive(true);
         }
     }
     void WinGame(){
-        messageText.text = "";
-        WinCondition.SetActive(true);
+        //WinCondition.SetActive(true);
 
         // Fechar o minigame
         TelaMiniGame.SetActive(false);
@@ -215,9 +248,8 @@ public class Questions : MonoBehaviour
         // Permitir que o jogador volte a se mover
         playerController.canMove = true;
     }
-    private void GameOver()
+    void GameOver()
     {
-        messageText.text = "";
         LoseCondition.SetActive(true);
     }
 }
