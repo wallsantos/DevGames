@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(canMove);
         if (!canMove)
         {
             _playerDirection = Vector2.zero;

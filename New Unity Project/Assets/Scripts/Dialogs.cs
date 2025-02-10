@@ -38,6 +38,15 @@ public class Dialogs : MonoBehaviour
                 case 5:
                     msgText = "Agora, sempre que aparecerem novas imagens na tela, significa que você tem novos desafios, boa sorte!";
                     break;
+                case 6:
+                    if (choseOperation.instance == null){
+                        choseOperation.instance = FindObjectOfType<choseOperation>();
+                    }
+
+                    if (choseOperation.instance != null){
+                        msgText = "Você selecionou a operação: " + choseOperation.instance.operation;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -59,6 +68,9 @@ public class Dialogs : MonoBehaviour
                     contDialog=5;
                     break;
                 case 5:
+                    contDialog=0;
+                    break;
+                case 6:
                     contDialog=0;
                     break;
                 default:

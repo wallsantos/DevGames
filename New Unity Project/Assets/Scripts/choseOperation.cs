@@ -2,21 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class choseOperation : MonoBehaviour
 {
     public GameObject TelaMiniGame;
     private Text questionText;
-    private Button[] answerButtons;
+    private Button[] operationButtons;
     private Button ButtonExit;
-    public string answer="";
+    public string operation="";
     private GameObject QuestIcon;
+    public int dialogId;
+
+    public GameObject DoorOpen;
+    public GameObject DoorClose;
 
     private PlayerController playerController;
 
     private bool playerProximo = false;
+    public static choseOperation instance;
 
+    void awake(){
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     void start(){
+        operation="";
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -40,26 +59,29 @@ public class choseOperation : MonoBehaviour
     }
     void Update(){
         if(playerProximo && Input.GetKeyDown(KeyCode.E)){
-            playerController.canMove = false;
+            if(playerController!=null){
+                playerController.canMove = false;
+            }
             TelaMiniGame.SetActive(true);
-            answerButtons = new Button[4];
-            answerButtons[0] = GameObject.Find("answerButtons[0]").GetComponent<Button>();
-            answerButtons[1] = GameObject.Find("answerButtons[1]").GetComponent<Button>();
-            answerButtons[2] = GameObject.Find("answerButtons[2]").GetComponent<Button>();
-            answerButtons[3] = GameObject.Find("answerButtons[3]").GetComponent<Button>();
+            operationButtons = new Button[4];
+            operationButtons[0] = GameObject.Find("answerButtons[0]").GetComponent<Button>();
+            operationButtons[1] = GameObject.Find("answerButtons[1]").GetComponent<Button>();
+            operationButtons[2] = GameObject.Find("answerButtons[2]").GetComponent<Button>();
+            operationButtons[3] = GameObject.Find("answerButtons[3]").GetComponent<Button>();
             ButtonExit = GameObject.Find("ButtonExit").GetComponent<Button>();
+            ResetarBotoes();
             questionText = GameObject.Find("TelaMiniGame/Image/questionText").GetComponent<Text>();
             questionText.text = "Selecione a operação que fará:";
-            answerButtons[0].GetComponentInChildren<Text>().text = "+ (Mais/Adição)";
-            answerButtons[1].GetComponentInChildren<Text>().text = "- (Menos/Subtração)";
-            answerButtons[2].GetComponentInChildren<Text>().text = "X (Vezes/Multiplicação)";
-            answerButtons[3].GetComponentInChildren<Text>().text = ": (Dividir/Divisão)";
+            operationButtons[0].GetComponentInChildren<Text>().text = "+ : Adição";
+            operationButtons[1].GetComponentInChildren<Text>().text = "- : Subtração";
+            operationButtons[2].GetComponentInChildren<Text>().text = "X : Multiplicação";
+            operationButtons[3].GetComponentInChildren<Text>().text = "/ : Divisão";
             
             
-            foreach(Button btn in answerButtons){
+            foreach(Button btn in operationButtons){
                 btn.onClick.RemoveAllListeners();    
-                answer = btn.GetComponentInChildren<Text>().text;
-                btn.onClick.AddListener(() => CapturarResposta(answer));
+                string operationCopy=btn.GetComponentInChildren<Text>().text;
+                btn.onClick.AddListener(() => CapturarResposta(operationCopy));
                  
             }
             ButtonExit.onClick.RemoveAllListeners();
@@ -67,7 +89,7 @@ public class choseOperation : MonoBehaviour
         }
         void CapturarResposta(string resposta)
         {   
-            answer = resposta;
+            operation = resposta;
             ExitMinigame();
         }
 
@@ -76,12 +98,29 @@ public class choseOperation : MonoBehaviour
         exitButton.onClick.RemoveAllListeners();
         exitButton.onClick.AddListener(ExitMinigame);
     }
+    void ResetarBotoes()
+    {
+        foreach (Button btn in operationButtons)
+        {
+            ColorBlock cb = btn.colors;
+            cb.normalColor = Color.white; // Cor padrão (mude conforme necessário)
+            btn.colors = cb;
+
+            btn.interactable = true; // Garante que os botões fiquem interativos novamente
+            EventSystem.current.SetSelectedGameObject(null); // Remove a seleção atual
+        }
+    }
     void ExitMinigame(){
         if(playerController!=null){
             playerController.canMove = true;
             playerController = null;
         }
-        QuestIcon.SetActive(false);
         TelaMiniGame.SetActive(false);
+        FindObjectOfType<Dialogs>().StartDialog(dialogId);
+        if(DoorClose.activeSelf){
+            QuestIcon.SetActive(false);
+            DoorOpen.GetComponent<SpriteRenderer>().sortingOrder = 10;
+            DoorClose.SetActive(false);
+        }
     }
 }

@@ -90,7 +90,6 @@ public class Questions : MonoBehaviour
             spriteQuestion3.GetComponent<SpriteRenderer>().sortingOrder = 0;
             spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 0;
             playerNearby = false;
-            //playerController = null;
         }
     }
 

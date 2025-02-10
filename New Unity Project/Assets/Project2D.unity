@@ -38760,6 +38760,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TelaMiniGame: {fileID: 518798183}
+  operation: 
+  dialogId: 6
+  DoorOpen: {fileID: 115595968}
+  DoorClose: {fileID: 280482544}
 --- !u!1 &1769999502
 GameObject:
   m_ObjectHideFlags: 0
@@ -39989,7 +39993,7 @@ MonoBehaviour:
   TelaMiniGame: {fileID: 518798183}
   DoorOpen: {fileID: 920157111}
   DoorClose: {fileID: 1993077285}
-  level: 0
+  level: 1
 --- !u!58 &1993077290
 CircleCollider2D:
   m_ObjectHideFlags: 0
