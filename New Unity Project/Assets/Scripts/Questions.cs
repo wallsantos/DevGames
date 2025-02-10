@@ -23,8 +23,10 @@ public class Questions : MonoBehaviour
     private Text questionText;
     private Button[] answerButtons;
     private Button ButtonExit;
-    
 
+    public GameObject DoorOpen;
+    public GameObject DoorClose;
+    
     private int correctAnswer;
 
     public int level;
@@ -54,25 +56,20 @@ public class Questions : MonoBehaviour
         if (playerNearby){
             
         }
-        if(playerNearby && Input.GetKeyDown(KeyCode.F)){
+        /*if(playerNearby && Input.GetKeyDown(KeyCode.F)){
             // Permitir que o jogador volte a se mover
             playerController.canMove = true;
-        }
+        }*/
     }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            spriteRenderer = spriteQuestion1.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 10;
-            spriteRenderer = spriteQuestion2.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 10;
-            spriteRenderer = spriteQuestion3.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 10;
-            spriteRenderer = spriteQuestion4.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 10;
+            spriteQuestion1.GetComponent<SpriteRenderer>().sortingOrder = 10;
+            spriteQuestion2.GetComponent<SpriteRenderer>().sortingOrder = 10;
+            spriteQuestion3.GetComponent<SpriteRenderer>().sortingOrder = 10;
+            spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 10;
             playerController = other.GetComponent<PlayerController>();
         }
     }
@@ -82,16 +79,12 @@ public class Questions : MonoBehaviour
         // Detecta se o jogador saiu da área do trigger
         if (other.CompareTag("Player"))
         {
-            spriteRenderer = spriteQuestion1.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 0;
-            spriteRenderer = spriteQuestion2.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 0;
-            spriteRenderer = spriteQuestion3.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 0;
-            spriteRenderer = spriteQuestion4.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = 0;
+            spriteQuestion1.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            spriteQuestion2.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            spriteQuestion3.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 0;
             playerNearby = false;
-            playerController = null;
+            //playerController = null;
         }
     }
 
@@ -211,7 +204,10 @@ public class Questions : MonoBehaviour
     {
         if (selectedAnswer == correctAnswer)
         {
-            WinGame();
+            DoorOpen.GetComponent<SpriteRenderer>().sortingOrder = 10;
+            DoorClose.SetActive(false);
+            TelaMiniGame.SetActive(false);
+            playerController.canMove = true;
         }
         else
         {
