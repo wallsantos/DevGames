@@ -9,6 +9,8 @@ public class Questions : MonoBehaviour
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
     public int dialogId;
+    private string operacao;
+    private choseOperation StringOperacao;
 
     private GameObject[] Lapis;
     private GameObject[] LapisPreto;
@@ -51,6 +53,7 @@ public class Questions : MonoBehaviour
     }
     void Update()
     {
+
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Interagir();
@@ -74,6 +77,8 @@ public class Questions : MonoBehaviour
             spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 10;
             playerController = other.GetComponent<PlayerController>();
         }
+        StringOperacao = other.GetComponent<choseOperation>();
+        Debug.Log(StringOperacao.answer);
     }
 
     void OnTriggerExit2D(Collider2D other)
