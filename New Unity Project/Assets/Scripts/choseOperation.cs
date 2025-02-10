@@ -10,29 +10,37 @@ public class choseOperation : MonoBehaviour
     private Button[] answerButtons;
     private Button ButtonExit;
     public string answer="";
+    private GameObject QuestIcon;
 
     private PlayerController playerController;
 
     private bool playerProximo = false;
 
+    void start(){
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            playerController = other.gameObject.GetComponent<PlayerController>();
             playerProximo = true;
+            QuestIcon = GameObject.Find("QuestIcon");
+            QuestIcon.GetComponent<SpriteRenderer>().sortingOrder = 10;
+
         }
     }
     void OnTriggerExit2D(Collider2D other){
         // Detecta se o jogador saiu da área do trigger
         if (other.CompareTag("Player"))
         {
-            playerController = other.GetComponent<PlayerController>();
             playerProximo = false;
+            QuestIcon.GetComponent<SpriteRenderer>().sortingOrder = 10;
 
         }
     }
     void Update(){
         if(playerProximo && Input.GetKeyDown(KeyCode.E)){
+            playerController.canMove = false;
             TelaMiniGame.SetActive(true);
             answerButtons = new Button[4];
             answerButtons[0] = GameObject.Find("answerButtons[0]").GetComponent<Button>();
@@ -69,6 +77,11 @@ public class choseOperation : MonoBehaviour
         exitButton.onClick.AddListener(ExitMinigame);
     }
     void ExitMinigame(){
+        if(playerController!=null){
+            playerController.canMove = true;
+            playerController = null;
+        }
+        QuestIcon.SetActive(false);
         TelaMiniGame.SetActive(false);
     }
 }

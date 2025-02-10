@@ -75,10 +75,9 @@ public class Questions : MonoBehaviour
             spriteQuestion2.GetComponent<SpriteRenderer>().sortingOrder = 10;
             spriteQuestion3.GetComponent<SpriteRenderer>().sortingOrder = 10;
             spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 10;
-            playerController = other.GetComponent<PlayerController>();
+            playerController = other.gameObject.GetComponent<PlayerController>();
         }
-        StringOperacao = other.GetComponent<choseOperation>();
-        Debug.Log(StringOperacao.answer);
+        //StringOperacao = other.GetComponent<choseOperation>();
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -214,8 +213,10 @@ public class Questions : MonoBehaviour
         {
             DoorOpen.GetComponent<SpriteRenderer>().sortingOrder = 10;
             DoorClose.SetActive(false);
+            ResetarBotoes();
             TelaMiniGame.SetActive(false);
             playerController.canMove = true;
+            playerController = null;
             FindObjectOfType<Dialogs>().StartDialog(dialogId);
         }
         else
@@ -251,7 +252,10 @@ public class Questions : MonoBehaviour
         // Fechar o minigame
         TelaMiniGame.SetActive(false);
         // Permitir que o jogador volte a se mover
-        playerController.canMove = true;
+        if(playerController!=null){
+            playerController.canMove = true;
+            playerController = null;
+        }
     }
     void GameOver()
     {

@@ -16,14 +16,14 @@ public class Dialogs : MonoBehaviour
     {
         dialogBox.SetActive(true);
         textDialog = GameObject.Find("CMPrincipal/Dialog Box/Canvas/textDialog").GetComponent<Text>();
-        playerController = this.gameObject.GetComponent<PlayerController>();
     }
     void Update()
     {
         if(contDialog>0){
+            playerController = this.gameObject.GetComponent<PlayerController>();
+            playerController.canMove = false;
             switch(contDialog){
                 case 1:
-                    playerController.canMove = false;
                     msgText = "Olá, obrigado por escolher jogar esse jogo que quer te ensinar de forma divertida a matemática, nesse breve tutorial ensinaremos você a jogar, Aperte E para continuar";
                     break;
                 case 2:
@@ -66,7 +66,10 @@ public class Dialogs : MonoBehaviour
                 }
             }
         }else{
-            playerController.canMove = true;
+            if(playerController!=null){
+                playerController.canMove = true;
+                playerController = null;
+            }
         }
     }
 
