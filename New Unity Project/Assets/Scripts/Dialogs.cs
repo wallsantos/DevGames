@@ -10,7 +10,9 @@ public class Dialogs : MonoBehaviour
     private Text textDialog;
     private int contDialog=1;
     private PlayerController playerController;
+    private choseOperation operation;
     private string msgText;
+    private string valorPego;
         
     void Start()
     {
@@ -39,13 +41,7 @@ public class Dialogs : MonoBehaviour
                     msgText = "Agora, sempre que aparecerem novas imagens na tela, significa que você tem novos desafios, boa sorte!";
                     break;
                 case 6:
-                    if (choseOperation.instance == null){
-                        choseOperation.instance = FindObjectOfType<choseOperation>();
-                    }
-
-                    if (choseOperation.instance != null){
-                        msgText = "Você selecionou a operação: " + choseOperation.instance.operation;
-                    }
+                    msgText = "Você selecionou a operação: " + valorPego + " ,você poderá altera-la no computador sempre que quiser!";
                     break;
                 default:
                     break;
@@ -85,8 +81,9 @@ public class Dialogs : MonoBehaviour
         }
     }
 
-    public void StartDialog(int id)
+    public void StartDialog(int id, string opSelect)
     {
         contDialog = id;
+        valorPego = opSelect;
     }
 }

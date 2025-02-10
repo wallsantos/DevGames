@@ -216,7 +216,7 @@ public class Questions : MonoBehaviour
             TelaMiniGame.SetActive(false);
             playerController.canMove = true;
             playerController = null;
-            FindObjectOfType<Dialogs>().StartDialog(dialogId);
+            FindObjectOfType<Dialogs>().StartDialog(dialogId,"");
         }
         else
         {

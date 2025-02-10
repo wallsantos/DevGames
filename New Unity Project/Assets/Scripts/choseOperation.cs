@@ -12,6 +12,8 @@ public class choseOperation : MonoBehaviour
     private Button ButtonExit;
     public string operation="";
     private GameObject QuestIcon;
+    private GameObject Computer;
+    private GameObject ComputerScreen;
     public int dialogId;
 
     public GameObject DoorOpen;
@@ -20,21 +22,8 @@ public class choseOperation : MonoBehaviour
     private PlayerController playerController;
 
     private bool playerProximo = false;
-    public static choseOperation instance;
 
-    void awake(){
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-    void start(){
+    void Start(){
         operation="";
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -44,8 +33,15 @@ public class choseOperation : MonoBehaviour
             playerController = other.gameObject.GetComponent<PlayerController>();
             playerProximo = true;
             QuestIcon = GameObject.Find("QuestIcon");
-            QuestIcon.GetComponent<SpriteRenderer>().sortingOrder = 10;
-
+            Computer = GameObject.Find("Computador");
+            ComputerScreen = GameObject.Find("TelaComputador");
+            if(this.gameObject.name=="Computador"){
+                ComputerScreen.GetComponent<SpriteRenderer>().sortingOrder = 10;
+            }else if(this.gameObject.name=="QuestIcon"){
+                if(QuestIcon!=null && operation==""){
+                    QuestIcon.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                }
+            }
         }
     }
     void OnTriggerExit2D(Collider2D other){
@@ -53,8 +49,10 @@ public class choseOperation : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerProximo = false;
-            QuestIcon.GetComponent<SpriteRenderer>().sortingOrder = 10;
-
+            if(QuestIcon!=null){
+                QuestIcon.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            ComputerScreen.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
     }
     void Update(){
@@ -96,7 +94,7 @@ public class choseOperation : MonoBehaviour
         // Configurar o botão de saída
         Button exitButton = TelaMiniGame.transform.Find("ButtonExit").GetComponent<Button>();
         exitButton.onClick.RemoveAllListeners();
-        exitButton.onClick.AddListener(ExitMinigame);
+        exitButton.onClick.AddListener(ExitWithoutChoose);
     }
     void ResetarBotoes()
     {
@@ -116,11 +114,20 @@ public class choseOperation : MonoBehaviour
             playerController = null;
         }
         TelaMiniGame.SetActive(false);
-        FindObjectOfType<Dialogs>().StartDialog(dialogId);
+        FindObjectOfType<Dialogs>().StartDialog(dialogId, operation);
+        playerProximo = false;
         if(DoorClose.activeSelf){
             QuestIcon.SetActive(false);
             DoorOpen.GetComponent<SpriteRenderer>().sortingOrder = 10;
             DoorClose.SetActive(false);
         }
+    }
+    void ExitWithoutChoose(){
+        if(playerController!=null){
+            playerController.canMove = true;
+            playerController = null;
+        }
+        TelaMiniGame.SetActive(false);
+        playerProximo = false;
     }
 }
