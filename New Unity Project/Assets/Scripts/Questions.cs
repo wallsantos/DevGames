@@ -46,6 +46,7 @@ public class Questions : MonoBehaviour
         spriteQuestion2 = GameObject.Find("spriteQuestion2");
         spriteQuestion3 = GameObject.Find("spriteQuestion3");
         spriteQuestion4 = GameObject.Find("spriteQuestion4");
+
     }
     void Update()
     {
@@ -92,10 +93,11 @@ public class Questions : MonoBehaviour
     {
         playerController.canMove = false;
         TelaMiniGame.SetActive(true);
-        answerButtons = new Button[3];
+        answerButtons = new Button[4];
         answerButtons[0] = GameObject.Find("answerButtons[0]").GetComponent<Button>();
         answerButtons[1] = GameObject.Find("answerButtons[1]").GetComponent<Button>();
         answerButtons[2] = GameObject.Find("answerButtons[2]").GetComponent<Button>();
+        answerButtons[3] = GameObject.Find("answerButtons[3]").GetComponent<Button>();
         questionText = GameObject.Find("TelaMiniGame/Image/questionText").GetComponent<Text>();
         ButtonExit = GameObject.Find("ButtonExit").GetComponent<Button>();
         GenerateQuestion();
