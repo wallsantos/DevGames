@@ -8,6 +8,7 @@ public class Questions : MonoBehaviour
     private bool playerNearby = false;
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
+    public int dialogId;
 
     private GameObject[] Lapis;
     private GameObject[] LapisPreto;
@@ -210,6 +211,7 @@ public class Questions : MonoBehaviour
             DoorClose.SetActive(false);
             TelaMiniGame.SetActive(false);
             playerController.canMove = true;
+            FindObjectOfType<Dialogs>().StartDialog(dialogId);
         }
         else
         {

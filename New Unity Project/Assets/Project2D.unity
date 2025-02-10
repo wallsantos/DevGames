@@ -1148,6 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf9c09ae821db2448fd759b0f654760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogId: 0
   WinCondition: {fileID: 0}
   LoseCondition: {fileID: 0}
   TelaMiniGame: {fileID: 518798183}
@@ -1590,6 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf9c09ae821db2448fd759b0f654760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogId: 0
   WinCondition: {fileID: 1168583231}
   LoseCondition: {fileID: 2046856641}
   TelaMiniGame: {fileID: 518798183}
@@ -38814,7 +38816,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogBox: {fileID: 1676937329}
-  contDialog: 1
 --- !u!1 &1775654372
 GameObject:
   m_ObjectHideFlags: 0
@@ -39707,7 +39708,6 @@ GameObject:
   - component: {fileID: 1993077288}
   - component: {fileID: 1993077290}
   - component: {fileID: 1993077289}
-  - component: {fileID: 1993077291}
   m_Layer: 0
   m_Name: wooden_door_0
   m_TagString: Untagged
@@ -39839,6 +39839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf9c09ae821db2448fd759b0f654760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogId: 4
   WinCondition: {fileID: 0}
   LoseCondition: {fileID: 0}
   TelaMiniGame: {fileID: 518798183}
@@ -39880,20 +39881,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.16049394}
   serializedVersion: 2
   m_Radius: 0.660494
---- !u!114 &1993077291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993077285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8457b567427a4418982c595c12b454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogBox: {fileID: 0}
-  contDialog: 4
 --- !u!1 &1997970476
 GameObject:
   m_ObjectHideFlags: 0
