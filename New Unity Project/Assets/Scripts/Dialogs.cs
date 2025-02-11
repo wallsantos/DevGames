@@ -35,7 +35,7 @@ public class Dialogs : MonoBehaviour
                     msgText = "NOSSO PRIMEIRO DESAFIO ESTÁ NA PORTA, VÁ ATÉ ELA E APERTE E PARA INICIAR.";
                     break;
                 case 4:
-                    msgText = "PARABÉNS, VOCÊ PASSOU O PRIMEIRO DESAFIO!";
+                    msgText = "PARABÉNS, VOCÊ PASSOU O PRIMEIRO DESAFIO! O PRÓXIMO SERÁ ESCOLHER A OPERAÇÃO MATEMÁTICA QUE QUER FAZER, VÁ ATÉ A PORTA DA SALA 1";
                     break;
                 case 5:
                     msgText = "AGORA, SEMPRE QUE APARECEREM NOVAS IMAGENS NA TELA, SIGNIFICA QUE VOCÊ TEM NOVOS DESAFIOS. AO ACERTAR, SUA NOTA NA FOLHA BRANCA AUMENTARÁ.";
