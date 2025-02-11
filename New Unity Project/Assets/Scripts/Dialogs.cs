@@ -26,22 +26,22 @@ public class Dialogs : MonoBehaviour
             playerController.canMove = false;
             switch(contDialog){
                 case 1:
-                    msgText = "Olá, obrigado por escolher jogar esse jogo que quer te ensinar de forma divertida a matemática, nesse breve tutorial ensinaremos você a jogar, Aperte E para continuar";
+                    msgText = "OLÁ, BEM-VINDO AO PEREIRINHA ADVENTURE, NESSE BREVE TUTORIAL ENSINAREMOS VOCÊ A JOGAR. APERTE E PARA CONTINUAR.";
                     break;
                 case 2:
-                    msgText = "Nosso jogo consiste em teclas WASD para mover-se, o Mouse para clicar nas alternativas e E para interagir";
+                    msgText = "NOSSO JOGO UTILIZA EM TECLAS WASD PARA MOVER-SE, O MOUSE PARA CLICAR NAS ALTERNATIVAS E E PARA INTERAGIR.";
                     break;
                 case 3:
-                    msgText = "Nosso primeiro desafio esta na porta, vá até ela e aperte E para iniciar";
+                    msgText = "NOSSO PRIMEIRO DESAFIO ESTÁ NA PORTA, VÁ ATÉ ELA E APERTE E PARA INICIAR.";
                     break;
                 case 4:
-                    msgText = "Parabéns, você passou o primeiro desafio";
+                    msgText = "PARABÉNS, VOCÊ PASSOU O PRIMEIRO DESAFIO!";
                     break;
                 case 5:
-                    msgText = "Agora, sempre que aparecerem novas imagens na tela, significa que você tem novos desafios, boa sorte!";
+                    msgText = "AGORA, SEMPRE QUE APARECEREM NOVAS IMAGENS NA TELA, SIGNIFICA QUE VOCÊ TEM NOVOS DESAFIOS. AO ACERTAR, SUA NOTA NA FOLHA BRANCA AUMENTARÁ.";
                     break;
                 case 6:
-                    msgText = "Você selecionou a operação: " + valorPego + " ,você poderá altera-la no computador sempre que quiser!";
+                    msgText = "VOCÊ SELECIONOU A OPERAÇÃO: " + valorPego + ", VOCÊ PODERÁ ALTERÁ-LA NO COMPUTADOR SEMPRE QUE QUISER!";
                     break;
                 default:
                     break;
@@ -81,7 +81,7 @@ public class Dialogs : MonoBehaviour
         }
     }
 
-    public void StartDialog(int id, string opSelect)
+    public void StartDialog(int id, string opSelect = "")
     {
         contDialog = id;
         valorPego = opSelect;

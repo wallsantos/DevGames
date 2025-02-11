@@ -69,11 +69,11 @@ public class choseOperation : MonoBehaviour
             ButtonExit = GameObject.Find("ButtonExit").GetComponent<Button>();
             ResetarBotoes();
             questionText = GameObject.Find("TelaMiniGame/Image/questionText").GetComponent<Text>();
-            questionText.text = "Selecione a operação que fará:";
-            operationButtons[0].GetComponentInChildren<Text>().text = "+ : Adição";
-            operationButtons[1].GetComponentInChildren<Text>().text = "- : Subtração";
-            operationButtons[2].GetComponentInChildren<Text>().text = "X : Multiplicação";
-            operationButtons[3].GetComponentInChildren<Text>().text = "/ : Divisão";
+            questionText.text = "SELECIONE QUAL OPERAÇÃO QUER NO JOGO";
+            operationButtons[0].GetComponentInChildren<Text>().text = "+ : ADIÇÃO";
+            operationButtons[1].GetComponentInChildren<Text>().text = "- : SUBTRAÇÃO";
+            operationButtons[2].GetComponentInChildren<Text>().text = "X : MULTIPLICAÇÃO";
+            operationButtons[3].GetComponentInChildren<Text>().text = "/ : DIVISÃO";
             
             
             foreach(Button btn in operationButtons){
