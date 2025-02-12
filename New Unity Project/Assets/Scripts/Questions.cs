@@ -158,8 +158,8 @@ public class Questions : MonoBehaviour
                     fatorRandom = 10;
                     break;
                 case 4:
-                    num1 = Random.Range(10, 50);
-                    num2 = Random.Range(10, 50);
+                    num1 = Random.Range(500, 999);
+                    num2 = Random.Range(500, 999);
                     fatorRandom = 10;
                     break;
                 default:

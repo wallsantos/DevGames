@@ -1,8 +1,6 @@
 /*
 Colocar Impares e pares
 
-Mudanca por niveis como porteira que abre
-
 Tempo para responder ampulheta
 
 Sistema de Ranking geral
@@ -11,11 +9,15 @@ Musiquinha
 
 Comemoracao com sons
 
-Uso em sala de aula(editável?)
+Parcialmente concluído - Uso em sala de aula
 
-Identidade visual
+Falta tela inicial - Identidade visual
 
 Colocar uma narrativa - Voce conquistou um diploma EBAAA(sensacao de progressao)
+
+08 a 12/02
+
+Feito - Mudanca por niveis como porteira que abre
 
 07/02
 
