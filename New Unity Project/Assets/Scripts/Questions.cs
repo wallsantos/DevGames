@@ -306,16 +306,16 @@ public class Questions : MonoBehaviour
 
     void RemoveLapis()
     {
-        if (Lapis[2].activeSelf) // Verifica se está ativo corretamente
+        for (int i = Lapis.Length - 1; i > 0; i--) // Começa do último lápis e vai para trás
         {
-            Lapis[2].SetActive(false);
-            LapisPreto[2].SetActive(true);
+            if (Lapis[i].activeSelf) // Se o lápis atual ainda estiver ativo, desativa e ativa o preto
+            {
+                Lapis[i].SetActive(false);
+                LapisPreto[i].SetActive(true);
+                return; // Sai da função para remover um lápis por vez
+            }
         }
-        if (Lapis[1].activeSelf) // Verifica se está ativo corretamente
-        {
-            Lapis[1].SetActive(false);
-            LapisPreto[1].SetActive(true);
-        }
+        ExitMinigame();
     }
     void WinGame(){
         //WinCondition.SetActive(true);
