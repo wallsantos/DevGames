@@ -9,13 +9,14 @@ public class Questions : MonoBehaviour
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
     public int dialogId;
-    private string operacao;
-    private choseOperation StringOperacao;
+    private Dictionary<string, string> operacaoAtualizada;
+    private string auxOperacao="+ : ADIÇÃO";
 
     private GameObject[] Lapis;
     private GameObject[] LapisPreto;
     public GameObject WinCondition;
     public GameObject LoseCondition;
+    private Text Nota;
 
     private GameObject spriteQuestion1;
     private GameObject spriteQuestion2;
@@ -26,11 +27,15 @@ public class Questions : MonoBehaviour
     private Text questionText;
     private Button[] answerButtons;
     private Button ButtonExit;
+    private Text L1L3;
+    private Text L2L4;
 
     public GameObject DoorOpen;
     public GameObject DoorClose;
     
     private int correctAnswer;
+    private static int checarleveis=0;
+    private static int NotaTotal=0;
 
     public int level;
 
@@ -50,10 +55,20 @@ public class Questions : MonoBehaviour
         spriteQuestion3 = GameObject.Find("spriteQuestion3");
         spriteQuestion4 = GameObject.Find("spriteQuestion4");
 
+        Nota = GameObject.Find("Nota").GetComponent<Text>();
+        Nota.text = NotaTotal.ToString();
+
+        L1L3 = GameObject.Find("L1Text").GetComponent<Text>();
+        L2L4 = GameObject.Find("L2Text").GetComponent<Text>();
+        operacaoAtualizada = new Dictionary<string, string>(){
+            { "+ : ADIÇÃO", "+ : ADIÇÃO"},
+            { "- : SUBTRAÇÃO", "- : SUBTRAÇÃO" },
+            { "X : MULTIPLICAÇÃO", "X : MULTIPLICAÇÃO" },
+            { "/ : DIVISÃO", "/ : DIVISÃO" }
+        };
     }
     void Update()
     {
-
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
             Interagir();
@@ -77,7 +92,6 @@ public class Questions : MonoBehaviour
             spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 10;
             playerController = other.gameObject.GetComponent<PlayerController>();
         }
-        //StringOperacao = other.GetComponent<choseOperation>();
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -95,16 +109,18 @@ public class Questions : MonoBehaviour
 
     void Interagir()
     {
-        playerController.canMove = false;
-        TelaMiniGame.SetActive(true);
-        answerButtons = new Button[4];
-        answerButtons[0] = GameObject.Find("answerButtons[0]").GetComponent<Button>();
-        answerButtons[1] = GameObject.Find("answerButtons[1]").GetComponent<Button>();
-        answerButtons[2] = GameObject.Find("answerButtons[2]").GetComponent<Button>();
-        answerButtons[3] = GameObject.Find("answerButtons[3]").GetComponent<Button>();
-        questionText = GameObject.Find("TelaMiniGame/Image/questionText").GetComponent<Text>();
-        ButtonExit = GameObject.Find("ButtonExit").GetComponent<Button>();
-        GenerateQuestion();
+        if(playerNearby==true){
+            playerController.canMove = false;
+            TelaMiniGame.SetActive(true);
+            answerButtons = new Button[4];
+            answerButtons[0] = GameObject.Find("answerButtons[0]").GetComponent<Button>();
+            answerButtons[1] = GameObject.Find("answerButtons[1]").GetComponent<Button>();
+            answerButtons[2] = GameObject.Find("answerButtons[2]").GetComponent<Button>();
+            answerButtons[3] = GameObject.Find("answerButtons[3]").GetComponent<Button>();
+            questionText = GameObject.Find("TelaMiniGame/Image/questionText").GetComponent<Text>();
+            ButtonExit = GameObject.Find("ButtonExit").GetComponent<Button>();
+            GenerateQuestion();
+        }
 
         void GenerateQuestion()
         {
@@ -120,11 +136,13 @@ public class Questions : MonoBehaviour
                 {"BANANA", "BANANAS"},
                 {"LARANJA", "LARANJAS"}
             };
-
             List<string> chaves = new List<string>(frutas.Keys);
             string fruta = chaves[random.Next(chaves.Count)];
-
             switch (level){
+                case 0:
+                    num1 = 1;
+                    num2 = 1;  
+                    break;
                 case 1:
                     num1 = Random.Range(1, 5);
                     num2 = Random.Range(1, 5);
@@ -139,17 +157,48 @@ public class Questions : MonoBehaviour
                     num2 = Random.Range(100, 500);
                     fatorRandom = 10;
                     break;
+                case 4:
+                    num1 = Random.Range(10, 50);
+                    num2 = Random.Range(10, 50);
+                    fatorRandom = 10;
+                    break;
                 default:
                     break;
             }
             int setAnswer = 0;
             string fruta1 = (num1==1)? fruta: frutas[fruta];
             string fruta2 = (num2==1)? fruta: frutas[fruta];
-            
-            correctAnswer = num1 + num2;
-
-            // Exibir a pergunta
-            questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n+{num2} {fruta2}?";
+            switch(operacaoAtualizada[auxOperacao]){
+                case "- : SUBTRAÇÃO":
+                    correctAnswer = num1 - num2;
+                    // Exibir a pergunta
+                    questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n-{num2} {fruta2}?";
+                    break;
+                case "X : MULTIPLICAÇÃO":
+                    correctAnswer = num1 * num2;
+                    // Exibir a pergunta
+                    questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \nx{num2} {fruta2}?";
+                    break;
+                case "/ : DIVISÃO":
+                    correctAnswer = num1 / num2;
+                    // Exibir a pergunta
+                    questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n:{num2} {fruta2}?";
+                    break;
+                default:
+                    correctAnswer = num1 + num2;
+                    // Exibir a pergunta
+                    questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n+{num2} {fruta2}?";
+                    break;
+            }
+            if(this.gameObject.name == "wooden_door_0"){
+                L1L3.text = "";
+                L2L4.text = "";
+            }else if(this.gameObject.name == "Kid"){
+                L1L3.text = questionText.text;
+                
+            }else if(this.gameObject.name == "Man"){
+                L2L4.text = questionText.text;
+            }
 
             // Gerar respostas aleatórias e colocar a correta em um botão aleatório
             int correctButtonIndex = Random.Range(0, answerButtons.Length);
@@ -170,8 +219,11 @@ public class Questions : MonoBehaviour
                             //answer = Random.Range(1, 20); // Gerar resposta aleatória
                             answer = correctAnswer + fatorRandom;
                             setAnswer = 1;
-                        }else{
+                        }else if(setAnswer==1){
                             answer = correctAnswer - fatorRandom + 5;
+                            setAnswer = 2;
+                        }else{
+                            answer = correctAnswer - fatorRandom;
                         }
                     } while (answer == correctAnswer || usedAnswers.Contains(answer)); // Evitar duplicações
                 }
@@ -182,14 +234,14 @@ public class Questions : MonoBehaviour
                 // Atualizar o texto do botão e adicionar o evento de clique
                 answerButtons[i].GetComponentInChildren<Text>().text = answer.ToString();
                 int selectedAnswer = answer; // Capturar valor para o evento
+                
                 answerButtons[i].onClick.RemoveAllListeners();
                 answerButtons[i].onClick.AddListener(() => CheckAnswer(selectedAnswer));
             }
 
             // Configurar o botão de saída
-            Button exitButton = TelaMiniGame.transform.Find("ButtonExit").GetComponent<Button>();
-            exitButton.onClick.RemoveAllListeners();
-            exitButton.onClick.AddListener(ExitMinigame);
+            ButtonExit.onClick.RemoveAllListeners();
+            ButtonExit.onClick.AddListener(ExitMinigame);
         }
     }
 
@@ -210,16 +262,40 @@ public class Questions : MonoBehaviour
     {
         if (selectedAnswer == correctAnswer)
         {
+            if(checarleveis==level){
+                checarleveis=checarleveis + 1;
+                switch(level){
+                    case 0:
+                        NotaTotal=0;
+                        break;
+                    case 1:
+                        NotaTotal+=2;
+                        break;
+                    case 2:
+                        NotaTotal+=2;
+                        break;
+                    case 3:
+                        NotaTotal+=2;
+                        break;
+                    case 4://Caso especial, trata-se do mais dificil
+                        NotaTotal+=4;
+                        break;
+                    default:
+                        break;
+                }
+                Nota.text = NotaTotal.ToString();
+            }
             DoorOpen.GetComponent<SpriteRenderer>().sortingOrder = 10;
             DoorClose.SetActive(false);
             ResetarBotoes();
-            TelaMiniGame.SetActive(false);
-            playerController.canMove = true;
-            playerController = null;
-            FindObjectOfType<Dialogs>().StartDialog(dialogId,"");
+            playerNearby = false;
+            FindObjectOfType<Dialogs>().StartDialog(dialogId);
+            ExitMinigame();
         }
         else
         {
+            NotaTotal-=1;
+            Nota.text = NotaTotal.ToString();
             RemoveLapis();
             if (Lapis[0].activeSelf == false)
             {
@@ -250,14 +326,17 @@ public class Questions : MonoBehaviour
     void ExitMinigame(){
         // Fechar o minigame
         TelaMiniGame.SetActive(false);
+        L1L3.text = "";
+        L2L4.text = "";
         // Permitir que o jogador volte a se mover
-        if(playerController!=null){
-            playerController.canMove = true;
-            playerController = null;
-        }
+        playerController.canMove = true;
+        playerController = null;
     }
     void GameOver()
     {
         LoseCondition.SetActive(true);
+    }
+    public void operacaoSelecionada(string op){
+        auxOperacao = op;
     }
 }

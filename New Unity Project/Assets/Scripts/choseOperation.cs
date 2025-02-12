@@ -88,6 +88,7 @@ public class choseOperation : MonoBehaviour
         void CapturarResposta(string resposta)
         {   
             operation = resposta;
+            FindObjectOfType<Questions>().operacaoSelecionada(operation);
             ExitMinigame();
         }
 

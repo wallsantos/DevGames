@@ -43,6 +43,9 @@ public class Dialogs : MonoBehaviour
                 case 6:
                     msgText = "VOCÊ SELECIONOU A OPERAÇÃO: " + valorPego + ", VOCÊ PODERÁ ALTERÁ-LA NO COMPUTADOR SEMPRE QUE QUISER!";
                     break;
+                case 7:
+                    msgText = "VOCÊ ACERTOU, VÁ PARA PRÓXIMA SALA";
+                    break;
                 default:
                     break;
             }
@@ -67,6 +70,9 @@ public class Dialogs : MonoBehaviour
                     contDialog=0;
                     break;
                 case 6:
+                    contDialog=0;
+                    break;
+                case 7:
                     contDialog=0;
                     break;
                 default:
