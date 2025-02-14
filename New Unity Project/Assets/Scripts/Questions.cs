@@ -33,7 +33,7 @@ public class Questions : MonoBehaviour
     public GameObject DoorClose;
     
     private int correctAnswer;
-    private static int checarleveis=0;
+    private static int checarleveis=1;
     private static float NotaTotal=0.0f;
 
     public int level;
@@ -55,7 +55,7 @@ public class Questions : MonoBehaviour
         spriteQuestion4 = GameObject.Find("spriteQuestion4");
 
         Nota = GameObject.Find("Nota").GetComponent<Text>();
-        Nota.text = NotaTotal.ToString();
+        Nota.text = "-";
 
         L1L3 = GameObject.Find("L1Text").GetComponent<Text>();
         L2L4 = GameObject.Find("L2Text").GetComponent<Text>();
@@ -309,11 +309,7 @@ public class Questions : MonoBehaviour
                         NotaTotal += 0.5f;
                         break;
                 }
-                if(NotaTotal==0.0f){
-                    Nota.text = "-";
-                }else{
-                    Nota.text = NotaTotal.ToString("F1", new CultureInfo("pt-BR"));
-                }
+                Nota.text = NotaTotal.ToString("F1", new CultureInfo("pt-BR"));
             }
             DoorOpen.GetComponent<SpriteRenderer>().sortingOrder = 10;
             DoorClose.SetActive(false);
@@ -339,8 +335,12 @@ public class Questions : MonoBehaviour
 
     void RemoveLapis()
     {
-        for (int i = Lapis.Length - 1; i > 0; i--) // Começa do último lápis e vai para trás
+        for (int i = Lapis.Length - 1; i >= 0; i--) // Começa do último lápis e vai para trás
         {
+            if(i==0){
+                GameOver();
+                break;
+            }
             if (Lapis[i].activeSelf) // Se o lápis atual ainda estiver ativo, desativa e ativa o preto
             {
                 Lapis[i].SetActive(false);

@@ -24,6 +24,7 @@ Ajustando Case para todos os 16 níveis
 Retirada de ChooseOperation
 Como retirei ChooseOperation,Apaguei QuestionIcon, Computador, Mesa Computador
 Ajustado o diálogo do tutorial, feito remoção de Triggers do cenário
+Ajuste dos diálogos, ajuste dos lápis apagados e tela de GameOver ativa
 
 13/02
 

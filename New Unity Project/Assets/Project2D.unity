@@ -1524,7 +1524,7 @@ GameObject:
   - component: {fileID: 335332076}
   - component: {fileID: 335332077}
   m_Layer: 0
-  m_Name: Kid
+  m_Name: nivel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf9c09ae821db2448fd759b0f654760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogId: 7
+  dialogId: 4
   WinCondition: {fileID: 1168583231}
   LoseCondition: {fileID: 2046856641}
   TelaMiniGame: {fileID: 518798183}
@@ -2623,7 +2623,7 @@ GameObject:
   - component: {fileID: 493437721}
   - component: {fileID: 493437720}
   m_Layer: 0
-  m_Name: CappaBoss
+  m_Name: nivel4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2656,7 +2656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf9c09ae821db2448fd759b0f654760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogId: 8
+  dialogId: 9
   WinCondition: {fileID: 0}
   LoseCondition: {fileID: 0}
   TelaMiniGame: {fileID: 518798183}
@@ -37074,7 +37074,7 @@ GameObject:
   - component: {fileID: 1359268904}
   - component: {fileID: 1359268909}
   m_Layer: 0
-  m_Name: Man
+  m_Name: nivel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37092,7 +37092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf9c09ae821db2448fd759b0f654760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogId: 7
+  dialogId: 8
   WinCondition: {fileID: 0}
   LoseCondition: {fileID: 0}
   TelaMiniGame: {fileID: 518798183}
@@ -39100,7 +39100,7 @@ GameObject:
   - component: {fileID: 1637369003}
   - component: {fileID: 1637369002}
   m_Layer: 0
-  m_Name: Man3
+  m_Name: nivel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39133,7 +39133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf9c09ae821db2448fd759b0f654760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogId: 7
+  dialogId: 8
   WinCondition: {fileID: 0}
   LoseCondition: {fileID: 0}
   TelaMiniGame: {fileID: 518798183}
@@ -40030,8 +40030,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -587.3, y: 496.5}
-  m_SizeDelta: {x: 29.6832, y: 60.9193}
+  m_AnchoredPosition: {x: -600.5, y: 505.6}
+  m_SizeDelta: {x: 42.8243, y: 36.8273}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1759236480
 MonoBehaviour:
@@ -40055,10 +40055,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 3
     m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0

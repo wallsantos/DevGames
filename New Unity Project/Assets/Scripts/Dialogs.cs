@@ -11,6 +11,7 @@ public class Dialogs : MonoBehaviour
     private int contDialog=1;
     private PlayerController playerController;
     private string msgText;
+    string teclas = "\"W\" \"A\" \"S\" \"D\"";
         
     void Start()
     {
@@ -27,25 +28,34 @@ public class Dialogs : MonoBehaviour
                     msgText = "OLÁ, BEM-VINDO AO PEREIRINHA ADVENTURE, NESSE BREVE TUTORIAL ENSINAREMOS VOCÊ A JOGAR. APERTE \"" + "E" + "\" PARA CONTINUAR.";
                     break;
                 case 2:
-                    msgText = "NOSSO JOGO UTILIZA EM TECLAS \""+"WASD"+"\" PARA MOVER-SE, O \""+"MOUSE"+"\" PARA CLICAR NAS ALTERNATIVAS E A TECLA \""+"E"+"\" PARA INTERAGIR.";
+                    msgText = "NOSSO JOGO UTILIZA AS TECLAS " + teclas + " PARA MOVER-SE, O \""+"MOUSE"+"\" PARA CLICAR NAS ALTERNATIVAS E A TECLA \""+"E"+"\" PARA INTERAGIR.";
                     break;
                 case 3:
-                    msgText = "EXISTEM ESCADAS QUE ACESSAM ANDARES COM AS OPERAÇÕES MATEMÁTICAS, NAS PAREDES ESTARÁ QUAL OPERAÇÃO E ANDAR VOCÊ ESTÁ.";
+                    msgText = "VÁ NA PRIMEIRA PORTA ABERTA E QUANDO APARECER UM ÍCONE ACIMA DO RESPONSÁVEL PELA SALA, APERTE \"" + "E" +"\"";
                     break;
                 case 4:
-                    msgText = "PARA RESPONDER PERGUNTAS VOCÊ DEVE IR ATÉ A SALA ABERTA E APERTAR \""+"E"+"\" QUANDO UM ÍCONE APARECER NO TOPO DO DONO DA SALA.";
+                    msgText = "VOCÊ ACERTOU O PRIMEIRO, PARABÉNS!";
                     break;
                 case 5:
-                    msgText = "VOCÊ TERMINA O JOGO QUANDO RESPONDER TODAS AS PERGUNTAS NO TEMPO LIMITE.";
+                    msgText = "EXISTEM ESCADAS QUE ACESSAM ANDARES COM AS OPERAÇÕES MATEMÁTICAS, SENDO ESSE PRIMEIRO ADIÇÃO, NAS PAREDES ESTARÁ QUAL OPERAÇÃO E ANDAR VOCÊ ESTÁ.";
                     break;
                 case 6:
-                    msgText = "PARA ABRIR AS PORTAS PRECISA RESPONDER AS PERGUNTAS DA ÚLTIMA PORTA ABERTA DO ANDAR\nBOA SORTE!.";
+                    msgText = "VOCÊ TERMINA O JOGO QUANDO RESPONDER TODAS AS PERGUNTAS DOS 4 ANDARES DENTRO DO TEMPO LIMITE. DE CADA NÍVEL.";
                     break;
                 case 7:
-                    msgText = "VOCÊ ACERTOU, A PRÓXIMA PORTA FOI ABERTA";
+                    msgText = "PARA ABRIR AS PORTAS PRECISA RESPONDER AS PERGUNTAS DA ÚLTIMA PORTA ABERTA\nBOA SORTE!";
                     break;
                 case 8:
-                    msgText = "PARABÉNS, VOCÊ ACERTOU E TERMINOU AS TAREFAS";
+                    msgText = "VOCÊ ACERTOU, JÁ PODE IR PARA PRÓXIMA PORTA ABERTA";
+                    break;
+                case 9:
+                    msgText = "VOCÊ ACERTOU A PERGUNTA MAIS DIFÍCIL DESSE ANDAR, JÁ PODE SUBIR PARA O PRÓXIMO.";
+                    break;
+                case 10:
+                    msgText = "PARABÉNS, VOCÊ TERMINOU AS TAREFAS";
+                    break;
+                case 11:
+                    msgText = "EM CASO DE ERRO EXISTEM BAÚS ESCONDIDOS NAS PAREDES, ELES RECUPERAM SUA VIDA(SEUS LÁPIS), NÃO DEIXE DE PROCURÁ-LOS.";
                     break;
                 default:
                     break;
@@ -62,22 +72,28 @@ public class Dialogs : MonoBehaviour
                     contDialog=3;
                     break;
                 case 3:
-                    contDialog=4;
+                    contDialog=0;
                     break;
                 case 4:
-                    contDialog=5;
+                    contDialog=11;
                     break;
                 case 5:
                     contDialog=6;
                     break;
                 case 6:
-                    contDialog=0;
+                    contDialog=7;
                     break;
                 case 7:
-                    contDialog=0;
+                    contDialog=8;
                     break;
                 case 8:
                     contDialog=0;
+                    break;
+                case 9:
+                    contDialog=0;
+                    break;
+                case 11:
+                    contDialog=5;
                     break;
                 default:
                     break;
