@@ -10,9 +10,7 @@ public class Dialogs : MonoBehaviour
     private Text textDialog;
     private int contDialog=1;
     private PlayerController playerController;
-    private choseOperation operation;
     private string msgText;
-    private string valorPego;
         
     void Start()
     {
@@ -26,25 +24,25 @@ public class Dialogs : MonoBehaviour
             playerController.canMove = false;
             switch(contDialog){
                 case 1:
-                    msgText = "OLÁ, BEM-VINDO AO PEREIRINHA ADVENTURE, NESSE BREVE TUTORIAL ENSINAREMOS VOCÊ A JOGAR. APERTE E PARA CONTINUAR.";
+                    msgText = "OLÁ, BEM-VINDO AO PEREIRINHA ADVENTURE, NESSE BREVE TUTORIAL ENSINAREMOS VOCÊ A JOGAR. APERTE \"" + "E" + "\" PARA CONTINUAR.";
                     break;
                 case 2:
-                    msgText = "NOSSO JOGO UTILIZA EM TECLAS WASD PARA MOVER-SE, O MOUSE PARA CLICAR NAS ALTERNATIVAS E E PARA INTERAGIR.";
+                    msgText = "NOSSO JOGO UTILIZA EM TECLAS \""+"WASD"+"\" PARA MOVER-SE, O \""+"MOUSE"+"\" PARA CLICAR NAS ALTERNATIVAS E A TECLA \""+"E"+"\" PARA INTERAGIR.";
                     break;
                 case 3:
-                    msgText = "NOSSO PRIMEIRO DESAFIO ESTÁ NA PORTA, VÁ ATÉ ELA E APERTE E PARA INICIAR.";
+                    msgText = "EXISTEM ESCADAS QUE ACESSAM ANDARES COM AS OPERAÇÕES MATEMÁTICAS, NAS PAREDES ESTARÁ QUAL OPERAÇÃO E ANDAR VOCÊ ESTÁ.";
                     break;
                 case 4:
-                    msgText = "PARABÉNS, VOCÊ PASSOU O PRIMEIRO DESAFIO! O PRÓXIMO SERÁ ESCOLHER A OPERAÇÃO MATEMÁTICA QUE QUER FAZER, VÁ ATÉ A PORTA DA SALA 1";
+                    msgText = "PARA RESPONDER PERGUNTAS VOCÊ DEVE IR ATÉ A SALA ABERTA E APERTAR \""+"E"+"\" QUANDO UM ÍCONE APARECER NO TOPO DO DONO DA SALA.";
                     break;
                 case 5:
-                    msgText = "AGORA, SEMPRE QUE APARECEREM NOVAS IMAGENS NA TELA, SIGNIFICA QUE VOCÊ TEM NOVOS DESAFIOS. AO ACERTAR, SUA NOTA NA FOLHA BRANCA AUMENTARÁ.";
+                    msgText = "VOCÊ TERMINA O JOGO QUANDO RESPONDER TODAS AS PERGUNTAS NO TEMPO LIMITE.";
                     break;
                 case 6:
-                    msgText = "VOCÊ SELECIONOU A OPERAÇÃO: " + valorPego + ", VOCÊ PODERÁ ALTERÁ-LA NO COMPUTADOR SEMPRE QUE QUISER!";
+                    msgText = "PARA ABRIR AS PORTAS PRECISA RESPONDER AS PERGUNTAS DA ÚLTIMA PORTA ABERTA DO ANDAR\nBOA SORTE!.";
                     break;
                 case 7:
-                    msgText = "VOCÊ ACERTOU, VÁ PARA PRÓXIMA SALA";
+                    msgText = "VOCÊ ACERTOU, A PRÓXIMA PORTA FOI ABERTA";
                     break;
                 case 8:
                     msgText = "PARABÉNS, VOCÊ ACERTOU E TERMINOU AS TAREFAS";
@@ -64,13 +62,13 @@ public class Dialogs : MonoBehaviour
                     contDialog=3;
                     break;
                 case 3:
-                    contDialog=0;
+                    contDialog=4;
                     break;
                 case 4:
                     contDialog=5;
                     break;
                 case 5:
-                    contDialog=0;
+                    contDialog=6;
                     break;
                 case 6:
                     contDialog=0;
@@ -92,10 +90,8 @@ public class Dialogs : MonoBehaviour
             }
         }
     }
-
-    public void StartDialog(int id, string opSelect = "")
+    public void StartDialog(int id)
     {
         contDialog = id;
-        valorPego = opSelect;
     }
 }

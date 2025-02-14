@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using System.Globalization;
 
 public class Questions : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class Questions : MonoBehaviour
     private PlayerController playerController;
     private SpriteRenderer spriteRenderer;
     public int dialogId;
-    private Dictionary<string, string> operacaoAtualizada;
-    private string auxOperacao="+ : ADIÇÃO";
 
     private GameObject[] Lapis;
     private GameObject[] LapisPreto;
@@ -35,7 +34,7 @@ public class Questions : MonoBehaviour
     
     private int correctAnswer;
     private static int checarleveis=0;
-    private static int NotaTotal=0;
+    private static float NotaTotal=0.0f;
 
     public int level;
 
@@ -60,12 +59,6 @@ public class Questions : MonoBehaviour
 
         L1L3 = GameObject.Find("L1Text").GetComponent<Text>();
         L2L4 = GameObject.Find("L2Text").GetComponent<Text>();
-        operacaoAtualizada = new Dictionary<string, string>(){
-            { "+ : ADIÇÃO", "+ : ADIÇÃO"},
-            { "- : SUBTRAÇÃO", "- : SUBTRAÇÃO" },
-            { "X : MULTIPLICAÇÃO", "X : MULTIPLICAÇÃO" },
-            { "/ : DIVISÃO", "/ : DIVISÃO" }
-        };
     }
     void Update()
     {
@@ -86,11 +79,24 @@ public class Questions : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
-            spriteQuestion1.GetComponent<SpriteRenderer>().sortingOrder = 10;
-            spriteQuestion2.GetComponent<SpriteRenderer>().sortingOrder = 10;
-            spriteQuestion3.GetComponent<SpriteRenderer>().sortingOrder = 10;
-            spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 10;
             playerController = other.gameObject.GetComponent<PlayerController>();
+            switch(this.gameObject.name){
+                case "nivel1":
+                    spriteQuestion1.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                    break;
+                case "nivel2":
+                    spriteQuestion2.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                    break;
+                case "nivel3":
+                    spriteQuestion3.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                    break;
+                case "nivel4":
+                    spriteQuestion4.GetComponent<SpriteRenderer>().sortingOrder = 10;
+                    break;
+                default:
+                    break;
+
+            }
         }
     }
 
@@ -144,20 +150,32 @@ public class Questions : MonoBehaviour
                     num2 = 1;  
                     break;
                 case 1:
-                    num1 = Random.Range(1, 5);
-                    num2 = Random.Range(1, 5);
+                case 5:
+                case 9:
+                case 13:
+                    num1 = Random.Range(1, 6);
+                    num2 = Random.Range(1, 6);
                     break;
                 case 2:
+                case 6:
+                case 10:
+                case 11:
+                case 12:
+                case 14:
+                case 15:
+                case 16:
                     num1 = Random.Range(10, 50);
                     num2 = Random.Range(10, 50);
                     fatorRandom = 10;
                     break;
                 case 3:
+                case 7:
                     num1 = Random.Range(100, 500);
                     num2 = Random.Range(100, 500);
                     fatorRandom = 10;
                     break;
                 case 4:
+                case 8:
                     num1 = Random.Range(500, 999);
                     num2 = Random.Range(500, 999);
                     fatorRandom = 10;
@@ -168,26 +186,40 @@ public class Questions : MonoBehaviour
             int setAnswer = 0;
             string fruta1 = (num1==1)? fruta: frutas[fruta];
             string fruta2 = (num2==1)? fruta: frutas[fruta];
-            switch(operacaoAtualizada[auxOperacao]){
-                case "- : SUBTRAÇÃO":
+            switch(level){
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    correctAnswer = num1 + num2;
+                    // Exibir a pergunta
+                    questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n+{num2} {fruta2}?";
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                case 8:
                     correctAnswer = num1 - num2;
                     // Exibir a pergunta
                     questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n-{num2} {fruta2}?";
                     break;
-                case "X : MULTIPLICAÇÃO":
+                case 9:
+                case 10:
+                case 11:
+                case 12:
                     correctAnswer = num1 * num2;
                     // Exibir a pergunta
                     questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \nx{num2} {fruta2}?";
                     break;
-                case "/ : DIVISÃO":
+                case 13:
+                case 14:
+                case 15:
+                case 16:
                     correctAnswer = num1 / num2;
                     // Exibir a pergunta
                     questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n:{num2} {fruta2}?";
                     break;
                 default:
-                    correctAnswer = num1 + num2;
-                    // Exibir a pergunta
-                    questionText.text = $"  QUANTO É:\n  {num1} {fruta1} \n+{num2} {fruta2}?";
                     break;
             }
             if(this.gameObject.name == "wooden_door_0"){
@@ -264,26 +296,24 @@ public class Questions : MonoBehaviour
         {
             if(checarleveis==level){
                 checarleveis=checarleveis + 1;
-                switch(level){
-                    case 0:
-                        NotaTotal=0;
+                switch (level)
+                {
+                    case 4:
+                    case 8:
+                    case 12:
+                    case 16:
+                        NotaTotal += 1.0f;
                         break;
-                    case 1:
-                        NotaTotal+=2;
-                        break;
-                    case 2:
-                        NotaTotal+=2;
-                        break;
-                    case 3:
-                        NotaTotal+=2;
-                        break;
-                    case 4://Caso especial, trata-se do mais dificil
-                        NotaTotal+=4;
-                        break;
-                    default:
+
+                    case int n when (n >= 1 && n <= 15 && n != 4 && n != 8 && n != 12 && n != 16):
+                        NotaTotal += 0.5f;
                         break;
                 }
-                Nota.text = NotaTotal.ToString();
+                if(NotaTotal==0.0f){
+                    Nota.text = "-";
+                }else{
+                    Nota.text = NotaTotal.ToString("F1", new CultureInfo("pt-BR"));
+                }
             }
             DoorOpen.GetComponent<SpriteRenderer>().sortingOrder = 10;
             DoorClose.SetActive(false);
@@ -294,8 +324,11 @@ public class Questions : MonoBehaviour
         }
         else
         {
-            NotaTotal-=1;
-            Nota.text = NotaTotal.ToString();
+            if(NotaTotal>=0.5f){
+                NotaTotal-=0.5f;
+            }else{
+                Nota.text = NotaTotal.ToString("F1", new CultureInfo("pt-BR"));
+            }
             RemoveLapis();
             if (Lapis[0].activeSelf == false)
             {
@@ -335,8 +368,5 @@ public class Questions : MonoBehaviour
     void GameOver()
     {
         LoseCondition.SetActive(true);
-    }
-    public void operacaoSelecionada(string op){
-        auxOperacao = op;
     }
 }
