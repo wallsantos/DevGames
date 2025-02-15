@@ -326,10 +326,6 @@ public class Questions : MonoBehaviour
                 Nota.text = NotaTotal.ToString("F1", new CultureInfo("pt-BR"));
             }
             RemoveLapis();
-            if (Lapis[0].activeSelf == false)
-            {
-                GameOver();
-            }
         }
     }
 

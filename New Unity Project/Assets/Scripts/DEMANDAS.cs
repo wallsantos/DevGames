@@ -25,6 +25,7 @@ Retirada de ChooseOperation
 Como retirei ChooseOperation,Apaguei QuestionIcon, Computador, Mesa Computador
 Ajustado o diálogo do tutorial, feito remoção de Triggers do cenário
 Ajuste dos diálogos, ajuste dos lápis apagados e tela de GameOver ativa
+Reposicao de 1 lapis por bau aberto
 
 13/02
 
