@@ -7,7 +7,7 @@ public class NewGame : MonoBehaviour
     public GameObject PauseMenu;
     private bool isCredit = false;
     private bool isPaused = false;
-
+    
     public void start(){
         creditos.SetActive(false);
     }
@@ -32,6 +32,8 @@ public class NewGame : MonoBehaviour
         isCredit = false;
     }
     public void RestartGame(){
+        Questions.checarleveis=1;
+        Questions.NotaTotal=0.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Resume();
     }

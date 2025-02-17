@@ -33,8 +33,8 @@ public class Questions : MonoBehaviour
     public GameObject DoorClose;
     
     private int correctAnswer;
-    private static int checarleveis=1;
-    private static float NotaTotal=0.0f;
+    public static int checarleveis=1;
+    public static float NotaTotal=0.0f;
 
     public int level;
 
