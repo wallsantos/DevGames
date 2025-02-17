@@ -8,6 +8,7 @@ public class Puzzle : MonoBehaviour
     private GameObject bauFechado;
     private bool PodeAbrir=false;
     private bool ShowChest=false;
+
     void Start()
     {
         bauAberto = GameObject.Find("bauAberto");
@@ -22,7 +23,7 @@ public class Puzzle : MonoBehaviour
         if(PodeAbrir && Input.GetKeyDown(KeyCode.E)){
             bauFechado.SetActive(false);
             bauAberto.GetComponent<SpriteRenderer>().sortingOrder = 10;
-            enabled = false;
+            RestauraLapis();
         }
     }
     void OnTriggerEnter2D(Collider2D other){
@@ -36,5 +37,11 @@ public class Puzzle : MonoBehaviour
             PodeAbrir = false;
             ShowChest = false;
         }
+    }
+    void RestauraLapis()
+    {
+        PlayerController player = FindObjectOfType<PlayerController>();
+        player.upUpdateLife(true);
+        player = null;
     }
 }

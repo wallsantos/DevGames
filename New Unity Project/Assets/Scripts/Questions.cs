@@ -11,11 +11,11 @@ public class Questions : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public int dialogId;
 
-    private GameObject[] Lapis;
-    private GameObject[] LapisPreto;
+    private GameObject Bau;
     public GameObject WinCondition;
     public GameObject LoseCondition;
     private Text Nota;
+    private Text LevelAtual;
 
     private GameObject spriteQuestion1;
     private GameObject spriteQuestion2;
@@ -39,26 +39,18 @@ public class Questions : MonoBehaviour
     public int level;
 
     void Start(){
-        Lapis = new GameObject[3];
-        Lapis[0] = GameObject.Find("pencil0");
-        Lapis[1] = GameObject.Find("pencil1");
-        Lapis[2] = GameObject.Find("pencil2");
-        //Lapis Preto
-        LapisPreto = new GameObject[3];
-        LapisPreto[0] = GameObject.Find("pencilB0");
-        LapisPreto[1] = GameObject.Find("pencilB1");
-        LapisPreto[2] = GameObject.Find("pencilB2");
-
         spriteQuestion1 = GameObject.Find("spriteQuestion1");
         spriteQuestion2 = GameObject.Find("spriteQuestion2");
         spriteQuestion3 = GameObject.Find("spriteQuestion3");
         spriteQuestion4 = GameObject.Find("spriteQuestion4");
 
         Nota = GameObject.Find("Nota").GetComponent<Text>();
-        Nota.text = "-";
-
+        if(Nota.text=="-"){
+            Nota.text = "-";
+        }
         L1L3 = GameObject.Find("L1Text").GetComponent<Text>();
         L2L4 = GameObject.Find("L2Text").GetComponent<Text>();
+        LevelAtual = GameObject.Find("AtLevel").GetComponent<Text>();
     }
     void Update()
     {
@@ -144,42 +136,100 @@ public class Questions : MonoBehaviour
             };
             List<string> chaves = new List<string>(frutas.Keys);
             string fruta = chaves[random.Next(chaves.Count)];
-            switch (level){
-                case 0:
-                    num1 = 1;
-                    num2 = 1;  
-                    break;
-                case 1:
-                case 5:
-                case 9:
-                case 13:
-                    num1 = Random.Range(1, 6);
-                    num2 = Random.Range(1, 6);
-                    break;
+            switch (level) {
+                // Adição
                 case 2:
-                case 6:
-                case 10:
-                case 11:
-                case 12:
-                case 14:
-                case 15:
-                case 16:
                     num1 = Random.Range(10, 50);
                     num2 = Random.Range(10, 50);
                     fatorRandom = 10;
                     break;
                 case 3:
-                case 7:
                     num1 = Random.Range(100, 500);
                     num2 = Random.Range(100, 500);
                     fatorRandom = 10;
                     break;
                 case 4:
-                case 8:
                     num1 = Random.Range(500, 999);
                     num2 = Random.Range(500, 999);
                     fatorRandom = 10;
                     break;
+
+                // Subtração
+                case 5:
+                    num1 = Random.Range(4, 11);
+                    num2 = Random.Range(1, 5);
+                    break;
+                case 6:
+                    num1 = Random.Range(30, 50);
+                    num2 = Random.Range(10, 31);
+                    fatorRandom = 10;
+                    break;
+                case 7:
+                    num1 = Random.Range(400, 500);
+                    num2 = Random.Range(100, 401);
+                    fatorRandom = 10;
+                    break;
+                case 8:
+                    num1 = Random.Range(500, 999);
+                    num2 = Random.Range(100, 501);
+                    fatorRandom = 10;
+                    break;
+
+                // Multiplicação
+                case 1:
+                case 9: // Começa multiplicação
+                    num1 = Random.Range(1, 6);
+                    num2 = Random.Range(1, 6);
+                    break;
+                case 10:
+                    num1 = Random.Range(2, 11);
+                    num2 = Random.Range(2, 11);
+                    fatorRandom = 1;
+                    break;
+                case 11:
+                    num1 = Random.Range(10, 26);
+                    num2 = Random.Range(2, 11);
+                    fatorRandom = 10;
+                    break;
+                case 12:
+                    num1 = Random.Range(20, 51);
+                    num2 = Random.Range(5, 21);
+                    fatorRandom = 20;
+                    break;
+
+                // Divisão
+                case 13:
+                    num1 = Random.Range(5, 26);
+                    num2 = Random.Range(1, 6);
+                    while (num1 % num2 != 0) {
+                        num2 = Random.Range(1, 6);
+                    }
+                    fatorRandom = 1;
+                    break;
+                case 14:
+                    num1 = Random.Range(20, 100);
+                    num2 = Random.Range(2, 11);
+                    while (num1 % num2 != 0) {
+                        num2 = Random.Range(2, 11);
+                    }
+                    fatorRandom = 2;
+                    break;
+                case 15:
+                    num1 = Random.Range(100, 501);
+                    num2 = Random.Range(5, 21);
+                    // Garantir que num1 seja divisível por num2
+                    num1 = num2 * Random.Range(5, 26);  // Multiplicar num2 por um valor aleatório para garantir divisibilidade
+                    fatorRandom = 3;
+                    break;
+
+                case 16:
+                    num1 = Random.Range(200, 1000);
+                    num2 = Random.Range(10, 51);
+                    // Garantir que num1 seja divisível por num2
+                    num1 = num2 * Random.Range(4, 21);  // Multiplicar num2 por um valor aleatório para garantir divisibilidade
+                    fatorRandom = 3;
+                    break;
+
                 default:
                     break;
             }
@@ -294,8 +344,18 @@ public class Questions : MonoBehaviour
     {
         if (selectedAnswer == correctAnswer)
         {
+            if(checarleveis == 16){
+                if(NotaTotal>5.5){
+                    WinGame();
+                }else{
+                    GameOver();
+                }
+            }
             if(checarleveis==level){
                 checarleveis=checarleveis + 1;
+                if(checarleveis != 16){
+                    LevelAtual.text = "LEVEL ATUAL: " + checarleveis + "/16";
+                }
                 switch (level)
                 {
                     case 4:
@@ -322,6 +382,7 @@ public class Questions : MonoBehaviour
         {
             if(NotaTotal>=0.5f){
                 NotaTotal-=0.5f;
+                Nota.text = NotaTotal.ToString("F1", new CultureInfo("pt-BR"));
             }else{
                 Nota.text = NotaTotal.ToString("F1", new CultureInfo("pt-BR"));
             }
@@ -331,23 +392,15 @@ public class Questions : MonoBehaviour
 
     void RemoveLapis()
     {
-        for (int i = Lapis.Length - 1; i >= 0; i--) // Começa do último lápis e vai para trás
-        {
-            if(i==0){
-                GameOver();
-                break;
-            }
-            if (Lapis[i].activeSelf) // Se o lápis atual ainda estiver ativo, desativa e ativa o preto
-            {
-                Lapis[i].SetActive(false);
-                LapisPreto[i].SetActive(true);
-                return; // Sai da função para remover um lápis por vez
-            }
+        if(playerController.EndGame()){
+            ExitMinigame();
+            GameOver();
+        }else{
+            playerController.upUpdateLife(false);
         }
-        ExitMinigame();
     }
     void WinGame(){
-        //WinCondition.SetActive(true);
+        WinCondition.SetActive(true);
 
         // Fechar o minigame
         TelaMiniGame.SetActive(false);

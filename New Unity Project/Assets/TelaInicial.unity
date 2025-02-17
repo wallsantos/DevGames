@@ -123,90 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &11463298
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 11463299}
-  - component: {fileID: 11463301}
-  - component: {fileID: 11463300}
-  m_Layer: 5
-  m_Name: Credits
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &11463299
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11463298}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1741057103}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -652.35205, y: -374}
-  m_SizeDelta: {x: 552.1818, y: 258.535}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &11463300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11463298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.74509805, g: 0.6971881, b: 0.15294117, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 75
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 75
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'Criado por:
-
-    Thiago Zanini
-
-    Wallace Costa'
---- !u!222 &11463301
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11463298}
-  m_CullTransparentMesh: 1
 --- !u!1 &27121665
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.3005, y: -0.179}
-  m_SizeDelta: {x: 1126.7539, y: 726.0657}
+  m_AnchoredPosition: {x: -101.6311, y: -87.775375}
+  m_SizeDelta: {x: 625.6216, y: 779.0309}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &27121667
 MonoBehaviour:
@@ -258,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.74509805, g: 0.69803923, b: 0.15294118, a: 1}
+  m_Color: {r: 0.58147615, g: 0.9716981, b: 0.5271004, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -266,9 +182,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 52
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: c09f62436bedf6f4abad3cf7fe726ece, type: 3}
+    m_FontSize: 28
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 100
@@ -278,11 +194,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Agradecemos inicialmente aos professores:\nDr. Fabio Cappabianco\nDra.
-    Vanessa Pereira\nPor nos motivar a fazer esse jogo.\n\nAgradecemos ao canal do
-    Youtube \"Academia Unity\" @academiaunity por disponibilizar um conte\xFAdo de
-    alta qualidade que nos deu suporte na cria\xE7\xE3o do core do nosso projeto.\n\nAgradecemos
-    ao site https://opengameart.org/ pelas sprites gr\xE1tis"
+  m_Text: "Criado por:\nThiago Zanini\nWallace Costa\n\nAgradecemos inicialmente
+    aos professores:\nDr. Fabio Cappabianco\nDra. Vanessa Pereira\nPor nos motivar
+    a fazer esse jogo.\n\nAgradecemos ao canal do Youtube \"Academia Unity\" @academiaunity
+    por disponibilizar um conte\xFAdo de alta qualidade que nos deu suporte na cria\xE7\xE3o
+    do core do nosso projeto.\n\nAgradecemos ao site https://opengameart.org/ pelas
+    sprites gr\xE1tis"
 --- !u!222 &27121668
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -303,7 +220,7 @@ GameObject:
   - component: {fileID: 351913020}
   - component: {fileID: 351913019}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Welcome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.74509805, g: 0.69803923, b: 0.15294118, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.4994216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -350,7 +267,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: c09f62436bedf6f4abad3cf7fe726ece, type: 3}
     m_FontSize: 100
     m_FontStyle: 1
     m_BestFit: 0
@@ -671,7 +588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a4673aee37f7d1e4cb45cd4790d877e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b350d0f10adacd7488af847933897987, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -818,8 +735,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8ed008077887c054a8cd49492c09b290, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1148,7 +1065,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76b62d50c3edaa5429dc7730282af512, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8783f0cb93328f746bcee95ac7443853, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1199,7 +1116,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1512849059}
-  - {fileID: 11463299}
   - {fileID: 2038093705}
   - {fileID: 856363462}
   - {fileID: 2061810838}
@@ -1405,8 +1321,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8ed008077887c054a8cd49492c09b290, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1539,8 +1455,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8ed008077887c054a8cd49492c09b290, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
