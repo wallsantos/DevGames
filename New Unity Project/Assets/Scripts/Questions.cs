@@ -346,12 +346,10 @@ public class Questions : MonoBehaviour
         string respostaCorreta = correctAnswer.ToString();
         string alternativa = "";
         // Identifica o botão correto
-        Debug.Log("Resposta Correta: " + respostaCorreta);
         for (int i = 0; i < answerButtons.Length; i++)
         {
             alternativa = answerButtons[i].GetComponentInChildren<Text>().text;
-            //Debug.Log("Alternativa: " + alternativa);
-            if (alternativa == respostaCorreta && correctButtonIndex == -1)
+            if (alternativa == respostaCorreta && correctButtonIndex == -1 && i != -1)
             {
                 correctButtonIndex = i;
             }
