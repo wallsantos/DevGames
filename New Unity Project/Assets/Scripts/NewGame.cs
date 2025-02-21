@@ -34,7 +34,7 @@ public class NewGame : MonoBehaviour
     public void RestartGame(){
         Questions.checarleveis=1;
         Questions.NotaTotal=0.0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Project2D");
         Resume();
     }
 

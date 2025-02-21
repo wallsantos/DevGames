@@ -37,6 +37,7 @@ public class Questions : MonoBehaviour
     public static float NotaTotal=0.0f;
 
     public int level;
+    private bool isGodMode = false;
 
     void Start(){
         spriteQuestion1 = GameObject.Find("spriteQuestion1");
@@ -60,6 +61,9 @@ public class Questions : MonoBehaviour
         }
         if (playerNearby){
             
+        }
+        if(Input.GetKeyDown(KeyCode.G)){
+            ToggleGodMode();
         }
         /*if(playerNearby && Input.GetKeyDown(KeyCode.F)){
             // Permitir que o jogador volte a se mover
@@ -327,8 +331,75 @@ public class Questions : MonoBehaviour
         }
     }
 
+    public void ToggleGodMode()
+    {
+        if (answerButtons == null || answerButtons.Length == 0)
+        {
+            return;
+        }
+
+        isGodMode = !isGodMode;
+        UpdateButtonColors();
+    }
+    void UpdateButtonColors(){
+        int correctButtonIndex = -1;
+        string respostaCorreta = correctAnswer.ToString();
+        string alternativa = "";
+        // Identifica o botão correto
+        Debug.Log("Resposta Correta: " + respostaCorreta);
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            alternativa = answerButtons[i].GetComponentInChildren<Text>().text;
+            //Debug.Log("Alternativa: " + alternativa);
+            if (alternativa == respostaCorreta && correctButtonIndex == -1)
+            {
+                correctButtonIndex = i;
+            }
+        }
+
+        if (isGodMode)
+        {
+            for (int i = 0; i < answerButtons.Length; i++)
+            {
+                if(correctButtonIndex != -1){
+                    Button button = answerButtons[i].GetComponent<Button>();
+                    ColorBlock colors = button.colors;
+                    colors.normalColor = (i == correctButtonIndex) ? Color.green : Color.red;
+                    button.colors = colors;
+
+                    // Forçar a atualização chamando esta linha:
+                    button.GetComponent<Image>().color = colors.normalColor;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < answerButtons.Length; i++)
+            {
+                Button button = answerButtons[i].GetComponent<Button>();
+                ColorBlock colors = button.colors;
+                colors.normalColor = Color.white; // Cor normal de volta para branco
+                button.colors = colors;
+
+                // Forçar atualização da cor do botão
+                button.GetComponent<Image>().color = colors.normalColor;
+            }
+        }
+        respostaCorreta = "";
+    }
+
     void ResetarBotoes()
     {
+        for (int i = 0; i < answerButtons.Length; i++)
+        {
+            Button button = answerButtons[i].GetComponent<Button>();
+            ColorBlock colors = button.colors;
+            colors.normalColor = Color.white; // Cor normal de volta para branco
+            button.colors = colors;
+
+            // Forçar atualização da cor do botão
+            button.GetComponent<Image>().color = colors.normalColor;
+        }
         foreach (Button botao in answerButtons)
         {
             ColorBlock cb = botao.colors;
@@ -407,12 +478,15 @@ public class Questions : MonoBehaviour
     }
     void ExitMinigame(){
         // Fechar o minigame
+        ResetarBotoes();
         TelaMiniGame.SetActive(false);
         L1L3.text = "";
         L2L4.text = "";
         // Permitir que o jogador volte a se mover
         playerController.canMove = true;
         playerController = null;
+        isGodMode = false;
+        ResetarBotoes();
     }
     void GameOver()
     {
